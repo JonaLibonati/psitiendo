@@ -28,6 +28,6 @@
   }
 
   .button {
-    @apply font-poppins font-semibold text-white text-xl
+    @apply font-poppins font-semibold text-white text-lg lg:text-xl
   }
 }

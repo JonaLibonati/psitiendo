@@ -6,14 +6,14 @@ import arrowBottomRight from "../../assets/arrows/arrow-bottom-right.png"
 
 export const HeroButton = () => {
   return (
-    <div className="relative w-[430px] h-[200px] flex justify-center">
-      <button className="cursor-pointer button size-fit self-center  px-5 py-4 bg-steel-blue rounded-full border border-dark-gray shadow-lg hover:bg-brown transition">
+    <div className="relative w-[300px] h-[146px] lg:w-[430px] lg:h-[200px] flex justify-center">
+      <button className="cursor-pointer button size-fit self-center px-4 py-3 lg:px-5 lg:py-4 bg-steel-blue rounded-full border border-dark-gray shadow-lg hover:bg-brown transition">
         AGENDAR SESIÓN
       </button>
-      <img className="absolute top-[35px] left-[39px]" src={arrowTopLeft} alt />
-      <img className="absolute top-[14px] right-[31px]" src={arrowTopRight} alt />
-      <img className="absolute bottom-[17px] left-[34px] w-[75px]" src={arrowBottomLeft} alt />
-      <img className="absolute bottom-[12px] right-[31px] w-[64px]" src={arrowBottomRight} alt />
+      <img className="absolute top-[14px] left-[0px] lg:top-[35px] lg:left-[39px] w-[56px] lg:w-[72px]" src={arrowTopLeft} alt />
+      <img className="absolute top-[0px] right-[-4px] lg:top-[14px] lg:right-[31px] w-[71px] lg:w-[89px]" src={arrowTopRight} alt />
+      <img className="absolute bottom-[0px] left-[0px] lg:bottom-[17px] lg:left-[34px] w-[60px] lg:w-[75px]" src={arrowBottomLeft} alt />
+      <img className="absolute bottom-[-4px] right-[-4px] lg:bottom-[12px] lg:right-[31px] w-[52px] lg:w-[64px]" src={arrowBottomRight} alt />
     </div>
   )
 }
