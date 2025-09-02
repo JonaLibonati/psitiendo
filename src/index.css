@@ -23,6 +23,14 @@
     @apply font-poppins font-semibold text-5xl/15 text-dark-gray tracking-wider;
   }
 
+  #in-progress .headline {
+    @apply font-light text-3xl/10 md:text-5xl/15;
+  }
+
+  #enfoque .headline {
+    @apply font-bold text-3xl/10 text-white text-shadow-lg;
+  }
+
   .subheadline {
     @apply font-poppins font-normal text-3xl/10 text-charcoal tracking-wider text-shadow-sm;
   }

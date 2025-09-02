@@ -6,6 +6,8 @@ import heroheadline from "./assets/hero_headline.png"
 import { HeroButton } from "./components/hero/HeroButton"
 import { Footer } from "./components/global/footer/Footer"
 import { Column } from "./components/primitives/column"
+import { Section } from "./components/primitives/Section"
+import { FocusSection } from "./components/focusSection/FocusSection"
 
 export const Landing = () => {
   return (
@@ -31,6 +33,12 @@ export const Landing = () => {
           </picture>
         </div>
       </section>
+      {false && <Section id="in-progress">
+        <p className="text-center headline max-w-[800px] m-auto">Dándole forma a&nbsp;este espacio seguro. Esta&nbsp;web pronto estará lista para&nbsp;vos.</p>
+      </Section>
+      }
+      <FocusSection />
+
       <Footer />
       <WhatsappButton />
     </>
