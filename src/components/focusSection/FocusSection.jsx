@@ -6,7 +6,7 @@ export const FocusSection = () => {
 
   return (
     <Section id="enfoque">
-      <ul className='grid grid-cols-3 gap-5'>
+      <ul className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
         {FocusData.map((card, i) => <FocusCard {...card} key={i} />)}
       </ul>
     </Section>
