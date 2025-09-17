@@ -1,21 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @import "tailwindcss";
 
 @theme {
-  
-  --color-camel: #cfc6c6;      /* camel */
-  --color-gray-light: #545454; /* light gray */
-  --color-owl-gray: #aba698;   /* owl gray */
-  --color-brown: #5b4f4f;      /* brown */
-  --color-violet: #916588;     /* violet */
-  --color-white: #ffffff;      /* pure white */
-  --color-black: #101010;       /* black */
+
+  --color-camel: #cfc6c6;
+  /* camel */
+  --color-gray-light: #545454;
+  /* light gray */
+  --color-owl-gray: #aba698;
+  /* owl gray */
+  --color-brown: #5b4f4f;
+  /* brown */
+  --color-violet: #916588;
+  /* violet */
+  --color-white: #ffffff;
+  /* pure white */
+  --color-black: #101010;
+  /* black */
   --color-dark-gray: #010101;
-  --color-charcoal: #494848;   /* charcoal */
+  --color-charcoal: #494848;
+  /* charcoal */
   --color-steel-blue: #6a99bf;
   --color-whatsapp-green: rgb(0, 215, 87);
   --font-poppins: "Poppins", sarif;
+  --font-mulish: "Mulish", sarif;
 }
 
 @layer components {
@@ -23,16 +32,76 @@
     @apply font-poppins font-semibold text-5xl/15 text-dark-gray tracking-wider;
   }
 
-  #in-progress .headline {
-    @apply font-light text-3xl/10 md:text-5xl/15;
+  section h2.headline {
+    @apply font-black text-camel text-5xl/15 md:text-6xl/18 tracking-wider break-words hyphens-auto text-shadow-lg;
+    -webkit-text-stroke-width: 2px;
+    /* Sets the stroke width */
+    -webkit-text-stroke-color: var(--color-brown);
+    /* Sets the stroke color */
   }
 
-  #enfoque .headline {
+  p {
+    @apply font-mulish text-lg text-dark-gray;
+  }
+
+  #in-progress .headline {
+    @apply text-3xl/10 md:text-5xl/15;
+  }
+
+  #terapias {
+    background-image: url(./assets/texture/paper_texture.png);
+  }
+
+  #testimonios {
+    background-color: var(--color-brown);
+    @apply pt-[200px] md:pt-[100px];
+  }
+
+  section#testimonios h2.headline {
+    @apply text-white;
+    -webkit-text-stroke-color: var(--color-dark-gray);
+    /* Sets the stroke color */
+  }
+
+  #enfoque h3.headline {
     @apply font-bold text-3xl/10 text-white text-shadow-lg;
+  }
+
+  /* #enfoque h2.headline {
+    @apply ;
+  } */
+
+  #enfoque p {
+    @apply text-white;
+  }
+
+  #testimonios p {
+    @apply text-white md:text-xl text-center italic;
   }
 
   .subheadline {
     @apply font-poppins font-normal text-3xl/10 text-charcoal tracking-wider text-shadow-sm;
+  }
+
+  #terapias .subheadline,
+  #testimonios .subheadline {
+    @apply text-left text-2xl/8 text-charcoal;
+  }
+
+  #testimonios .subheadline {
+    @apply text-white md:pr-[100px] lg:pr-[140px];
+  }
+
+  #terapias H4 {
+    @apply text-xl font-bold;
+  }
+
+  #terapias H3 {
+    @apply font-bold text-3xl/10 tracking-wider;
+  }
+
+  #terapias p {
+    @apply text-white md:text-xl;
   }
 
   .button {

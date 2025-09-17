@@ -8,7 +8,7 @@ import { SocialMediaAnchor } from "../socialMedia/SocialMediaAnchor"
 
 export const Footer = () => {
   return (
-    <footer className="bg-owl-gray text-black font-poppins">
+    <footer className="bg-camel text-black font-poppins">
       <Column className={"flex flex-wrap pt-12"}>
         <picture className="w-full" >
           <img

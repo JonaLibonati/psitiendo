@@ -8,6 +8,8 @@ import { Footer } from "./components/global/footer/Footer"
 import { Column } from "./components/primitives/column"
 import { Section } from "./components/primitives/Section"
 import { FocusSection } from "./components/focusSection/FocusSection"
+import { TestimonialSection } from "./components/testimonialSection/TestimonialSection"
+import { ServicesSection } from "./components/servicesSection/servicesSection"
 
 export const Landing = () => {
   return (
@@ -38,6 +40,10 @@ export const Landing = () => {
       </Section>
       }
       <FocusSection />
+
+      <ServicesSection />
+
+      <TestimonialSection />
 
       <Footer />
       <WhatsappButton />
