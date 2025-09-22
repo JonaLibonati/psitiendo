@@ -6,7 +6,7 @@ import { TestimonialData } from "./TestimonialData";
 import { TestimonialCard } from "./TestimonialCard";
 import { TestimonialButton } from "./TestimonialButton";
 import { TestimonialPlayStop } from "./TestimonialPlayStop";
-import bg from "../../assets/testimonios_background.png";
+import bg from "../../assets/testimonios_background.webp";
 
 
 export const TestimonialSection = () => {

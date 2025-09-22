@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PlusIcon } from "../global/icons/PlusIcon"
 import { DashIcon } from "../global/icons/DashIcon";
 
-export const FocusCard = ({ img, headline, text }) => {
+export const FocusCard = ({ img, headline, text, index }) => {
 
   const [toggle, setToggle] = useState(false);
 
@@ -20,8 +20,9 @@ export const FocusCard = ({ img, headline, text }) => {
 
         </button>
         <div className="relative z-60 px-4 py-6">
-          <h3 className="headline w-fit mb-5">
-            {headline}
+          <h3 className="relative headline w-fit mb-5">
+            {headline} 
+            {index === 2 && <span className={`absolute headline left-0 top-[120px] headline transition duration-800 ${toggle ? "opacity-0" : "opacity-100"}`} >{"(DBT)"}</span>}
           </h3>
           <p className={`transition duration-800 ${toggle ? "opacity-100" : "opacity-0"} `}>
             {text}

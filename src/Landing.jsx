@@ -1,8 +1,8 @@
 import { WhatsappButton } from "./components/global/whatsapp/WhatsappButton"
-import heroBg from "./assets/hero_background.jpg"
-import heroPortrait from "./assets/hero_portrait.png"
-import heroPortraitMobile from "./assets/hero_portrait_mobile.png"
-import heroheadline from "./assets/hero_headline.png"
+import heroBg from "./assets/hero_background.webp"
+import heroPortrait from "./assets/hero_portrait.webp"
+import heroPortraitMobile from "./assets/hero_portrait_mobile.webp"
+import heroheadline from "./assets/hero_headline.webp"
 import { HeroButton } from "./components/hero/HeroButton"
 import { Footer } from "./components/global/footer/Footer"
 import { Column } from "./components/primitives/column"
@@ -10,6 +10,8 @@ import { Section } from "./components/primitives/Section"
 import { FocusSection } from "./components/focusSection/FocusSection"
 import { TestimonialSection } from "./components/testimonialSection/TestimonialSection"
 import { ServicesSection } from "./components/servicesSection/servicesSection"
+import { AboutMeSection } from "./components/aboutMe/AboutMeSection"
+import { StatsSection } from "./components/statsSection/StatsSection"
 
 export const Landing = () => {
   return (
@@ -35,10 +37,11 @@ export const Landing = () => {
           </picture>
         </div>
       </section>
-      {false && <Section id="in-progress">
-        <p className="text-center headline max-w-[800px] m-auto">Dándole forma a&nbsp;este espacio seguro. Esta&nbsp;web pronto estará lista para&nbsp;vos.</p>
-      </Section>
-      }
+
+      <StatsSection />
+
+      <AboutMeSection />
+
       <FocusSection />
 
       <ServicesSection />

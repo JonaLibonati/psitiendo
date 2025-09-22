@@ -1,12 +1,12 @@
 
 import { Column } from './column'
 
-export const Section = ({id, headline, subheadline, children}) => {
+export const Section = ({id, headline, subheadline, pBottom = "pb-10", children}) => {
   return (
     <section id={id}>
       <Column className={"py-[100px]"}>
-        <h2 className='headline pb-10'>{headline}</h2>
-        <p className="subheadline pb-10">{subheadline}</p>
+        {headline && <h2 className='headline pb-10'>{headline}</h2>}
+        {subheadline && <p className={`subheadline ${pBottom}`}>{subheadline}</p>}
         { children }
       </Column>
     </section>

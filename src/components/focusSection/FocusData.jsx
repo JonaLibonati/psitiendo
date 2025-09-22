@@ -9,7 +9,7 @@ export const FocusData = [
   {
     img: imgMiradaIntegrativa,
     headline: "Mirada integrativa",
-    text: "Una mirada integrativa que combina lo mejor de la Psicodinámica y el Enfoque Dialéctico Conductual para acompañarte de manera personalizada y adaptarla a tus necesidades y objetivos."
+    text: "Una mirada integrativa que combina lo mejor de la Psicodinámica y el Enfoque Dialéctico Conductual (DBT) para acompañarte de manera personalizada y adaptarla a tus necesidades y objetivos."
   },
   {
     img: imgPsicodinamica,
@@ -34,7 +34,7 @@ export const FocusData = [
   {
     img: imgRitmo,
     headline: "A tu ritmo",
-    text: "Cada proceso es único y singular. Te acompaño a conocerte, a fortalecer lo que ya hay en vos y a sumar herramientas que te ayuden a sentirte más seguro/a y en calma en esta etapa de tu vida."
+    text: "Cada proceso es único y singular. Te acompaño a conocerte, a fortalecer lo que hay dentro tuyo y a sumar herramientas que te ayuden a sentirte más seguro/a y en calma en esta etapa de tu vida."
   }
 ]
 

@@ -4,8 +4,8 @@ import { ServicesCard } from "./ServicesCard"
 import { ServicesTab } from "./ServicesTab";
 import { ServicesData } from "./ServicesData";
 import { useClickOutside } from "../../hooks/useClickOutside";
-import stickersMobile from "../../assets/stickers_mobile.png";
-import stickersDesktop from "../../assets/stickers_desktop.png";
+import stickersMobile from "../../assets/stickers_mobile.webp";
+import stickersDesktop from "../../assets/stickers_desktop.webp";
 
 export const ServicesSection = () => {
 
@@ -16,13 +16,17 @@ export const ServicesSection = () => {
   useClickOutside(folder, () => setCurrentIndex(-1));
 
   return (
-    <Section id="terapias" headline={"TERAPIAS"} subheadline={"Conocé las terapias online que brindo."}>
+    <Section id="terapias" headline={"TERAPIAS"} subheadline={"Conoce las terapias online que brindo."}>
       <div ref={folder} className="relative max-w-[660px] m-auto text-white">
-        {ServicesData.map((item, i) => <ServicesTab onClick={() => setCurrentIndex(i)} index={i} currentIndex={currentIndex} item={item} />)}
-        <ul className={`relative h-[540px] md:h-[460px] ${currentIndex >= 0 ? "z-100" : "z-50"}`}>
-          {ServicesData.map((item, i) => <ServicesCard index={i} currentIndex={currentIndex} item={item} />)}
-        </ul>
-        <div className="absolute bottom-0 w-[110%] translate-x-[calc(-1/1.1*5%)] h-[81%] md:h-[77%] bg-[#95A2C8] z-80 rounded-2xl">
+        <div className={`relative ${currentIndex === -1 ? "z-50 tab-pop" : "z-100"}`}>
+          <div className="relative">
+            {ServicesData.map((item, i) => <ServicesTab onClick={() => setCurrentIndex(i)} index={i} currentIndex={currentIndex} item={item} />)}
+          </div>
+          <ul className="relative h-[540px] md:h-[460px]">
+            {ServicesData.map((item, i) => <ServicesCard onClick={() => setCurrentIndex(i)} index={i} currentIndex={currentIndex} item={item} />)}
+          </ul>
+        </div>
+        <div className="absolute bottom-0 w-[110%] translate-x-[calc(-1/1.1*5%)] h-[81%] md:h-[77%] bg-[#95A2C8] z-80 rounded-2xl shadow-lg">
           <picture className="relative">
             <source media="(max-width: 767px)" srcSet={stickersMobile} />
             <img
@@ -37,6 +41,3 @@ export const ServicesSection = () => {
     </Section>
   )
 }
-
-/* bg-[#AF6C67] */
-/* #E4DEFF */

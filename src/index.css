@@ -28,6 +28,11 @@
 }
 
 @layer components {
+
+  #root {
+    overflow: hidden;
+  }
+
   .headline {
     @apply font-poppins font-semibold text-5xl/15 text-dark-gray tracking-wider;
   }
@@ -44,9 +49,39 @@
     @apply font-mulish text-lg text-dark-gray;
   }
 
-  #in-progress .headline {
-    @apply text-3xl/10 md:text-5xl/15;
+  section#estadisticas h5.headline {
+    @apply font-black text-camel text-5xl/15 lg:text-6xl/18 tracking-wider break-words hyphens-auto text-shadow-lg;
+    -webkit-text-stroke-width: 2px;
+    /* Sets the stroke width */
+    -webkit-text-stroke-color: var(--color-brown);
+    /* Sets the stroke color */
   }
+
+  section#estadisticas p {
+    @apply text-xl lg:text-2xl font-poppins  text-brown ;
+  }
+
+  #sobre-mi h4 {
+    @apply font-bold font-mulish text-xl text-dark-gray not-italic;
+  }
+
+  #sobre-mi h5 {
+    @apply font-bold font-mulish text-lg text-dark-gray not-italic;
+  }
+
+  #sobre-mi {
+    background-color: var(--color-camel);
+    @apply text-white;
+  }
+
+  #sobre-mi .subheadline {
+    @apply md:pr-[70px] lg:pr-[200px];
+  }
+
+  section#sobre-mi h2.headline {
+    @apply text-white;
+  }
+
 
   #terapias {
     background-image: url(./assets/texture/paper_texture.png);
@@ -63,7 +98,8 @@
     /* Sets the stroke color */
   }
 
-  #enfoque h3.headline {
+  #enfoque h3.headline,
+  #enfoque h3.headline span {
     @apply font-bold text-3xl/10 text-white text-shadow-lg;
   }
 
@@ -84,12 +120,17 @@
   }
 
   #terapias .subheadline,
-  #testimonios .subheadline {
-    @apply text-left text-2xl/8 text-charcoal;
+  #testimonios .subheadline,
+  #enfoques .subheadline {
+    @apply text-left text-2xl/8 text-charcoal not-italic;
   }
 
   #testimonios .subheadline {
     @apply text-white md:pr-[100px] lg:pr-[140px];
+  }
+
+  #enfoque .subheadline {
+    @apply text-brown lg:pr-[140px];
   }
 
   #terapias H4 {
@@ -107,4 +148,15 @@
   .button {
     @apply font-poppins font-semibold text-white text-lg lg:text-xl
   }
+
+  @keyframes tab-pop {
+  0%   { transform: translateY(0); }
+  10%  { transform: translateY(-4px); }
+  20%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+.tab-pop {
+  animation: tab-pop 1.5s ease infinite;
+}
 }
