@@ -7,10 +7,13 @@ import { HeroButton } from "./components/hero/HeroButton"
 import { Footer } from "./components/global/footer/Footer"
 import { Column } from "./components/primitives/column"
 import { FocusSection } from "./components/focusSection/FocusSection"
-import { TestimonialSection } from "./components/testimonialSection/TestimonialSection"
 import { ServicesSection } from "./components/servicesSection/servicesSection"
 import { AboutMeSection } from "./components/aboutMe/AboutMeSection"
 import { StatsSection } from "./components/statsSection/StatsSection"
+import { lazy, Suspense } from "react";
+
+const TestimonialSection = lazy(() => import("./components/testimonialSection/TestimonialSection").then(module => ({ default: module.TestimonialSection })))
+  ;
 
 export const Landing = () => {
   return (
@@ -28,15 +31,16 @@ export const Landing = () => {
         <div className="absolute flex h-[inherit] w-full">
           <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroBg})` }} />
           <picture className="relative self-end ml-auto mr-auto">
-            <source media="(max-width: 767px)" srcSet={`${heroPortraitMobile}?as=webp`} type="image/webp" />
+            <source media="(max-width: 767px)" srcSet={heroPortraitMobile} type="image/webp" />
             <source media="(max-width: 767px)" srcSet={heroPortraitMobile} />
-            <source srcSet={`${heroPortrait}?as=webp`} type="image/webp" />
+            <source srcSet={heroPortrait} type="image/webp" />
             <img
               className="object-cover w-full min-h-[300px] md:min-h-[559px]"
               src={heroPortrait}
               alt="Psicóloga Daiana Telesca Farley sonriendo"
               fetchpriority="high"
               decoding="async"
+              sizes="100vw"
             />
           </picture>
         </div>
@@ -50,7 +54,9 @@ export const Landing = () => {
 
       <ServicesSection />
 
-      <TestimonialSection />
+      <Suspense fallback={<></>}>
+        <TestimonialSection />
+      </Suspense>
 
       <Footer />
       <WhatsappButton />

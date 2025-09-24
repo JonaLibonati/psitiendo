@@ -46,7 +46,7 @@ export const TestimonialSection = () => {
       <div className="flex flex-wrap justify-center items-center w-full overflow-hidden">
         <div className="order-1 md:order-2 w-fit flex justify-center pb-4">
           <div className="relative flex items-center h-[440px] md:h-[400px] lg:h-[340px]">
-            {TestimonialData.map((item, i) => <TestimonialCard {...item} i={i} index={index} />)}
+            {TestimonialData.map((item, i) => <TestimonialCard {...item} i={i} index={index} key={i} />)}
           </div>
         </div>
 
