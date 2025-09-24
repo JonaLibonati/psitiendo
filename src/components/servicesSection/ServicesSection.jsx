@@ -17,7 +17,7 @@ export const ServicesSection = () => {
 
   return (
     <Section id="terapias" headline={"TERAPIAS"} subheadline={"Conoce las terapias online que brindo."}>
-      <div ref={folder} className="relative max-w-[660px] m-auto text-white">
+      <div ref={folder} className="folder relative max-w-[660px] m-auto text-white">
         <div className={`relative ${currentIndex === -1 ? "z-50 tab-pop" : "z-100"}`}>
           <div className="relative">
             {ServicesData.map((item, i) => <ServicesTab onClick={() => setCurrentIndex(i)} index={i} currentIndex={currentIndex} item={item} />)}
@@ -28,11 +28,15 @@ export const ServicesSection = () => {
         </div>
         <div className="absolute bottom-0 w-[110%] translate-x-[calc(-1/1.1*5%)] h-[81%] md:h-[77%] bg-[#95A2C8] z-80 rounded-2xl shadow-lg">
           <picture className="relative">
+            <source media="(max-width: 767px)" srcSet={`${stickersMobile}?as=webp`} type="image/webp" />
             <source media="(max-width: 767px)" srcSet={stickersMobile} />
+            <source srcSet={`${stickersDesktop}?as=webp`} type="image/webp" />
             <img
-              className="object-cover w-full"
+              className="object-cover w-full min-h-[300px] md:min-h-[559px]"
               src={stickersDesktop}
-              alt="Imagen de sticker de psicologia y migración"
+              alt="Imagen de stickers de psicologia y migración"
+              loading="lazy"
+              decoding="async"
             />
           </picture>
         </div>

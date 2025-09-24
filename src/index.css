@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url("poppins.css");
+@import url("mulish.css");
 
 @import "tailwindcss";
 
@@ -23,8 +25,8 @@
   /* charcoal */
   --color-steel-blue: #6a99bf;
   --color-whatsapp-green: rgb(0, 215, 87);
-  --font-poppins: "Poppins", sarif;
-  --font-mulish: "Mulish", sarif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-mulish: "Mulish", sans-serif;
 }
 
 @layer components {
@@ -33,7 +35,15 @@
     overflow: hidden;
   }
 
+  /* font-poppins: black bold semibold regular regularItalic */
+
+  /* font-mulish: bold regular regularItalic */
+
   .headline {
+    @apply font-poppins font-semibold text-5xl/15 text-dark-gray tracking-wider;
+  }
+
+  section#hero h2.headlineH1 {
     @apply font-poppins font-semibold text-5xl/15 text-dark-gray tracking-wider;
   }
 
@@ -58,7 +68,7 @@
   }
 
   section#estadisticas p {
-    @apply text-xl lg:text-2xl font-poppins  text-brown ;
+    @apply text-xl lg:text-2xl font-poppins text-brown;
   }
 
   #sobre-mi h4 {
@@ -119,11 +129,12 @@
     @apply font-poppins font-normal text-3xl/10 text-charcoal tracking-wider text-shadow-sm;
   }
 
-  #terapias .subheadline,
+  /* #terapias .subheadline,
   #testimonios .subheadline,
-  #enfoques .subheadline {
-    @apply text-left text-2xl/8 text-charcoal not-italic;
-  }
+  #enfoques .subheadline,
+  #sobre-mi .subheadline {
+    @apply text-left  text-charcoal not-italic;
+  } */
 
   #testimonios .subheadline {
     @apply text-white md:pr-[100px] lg:pr-[140px];
@@ -137,7 +148,7 @@
     @apply text-xl font-bold;
   }
 
-  #terapias H3 {
+  #terapias .folder H3 {
     @apply font-bold text-3xl/10 tracking-wider;
   }
 
@@ -150,13 +161,36 @@
   }
 
   @keyframes tab-pop {
-  0%   { transform: translateY(0); }
-  10%  { transform: translateY(-4px); }
-  20%  { transform: translateY(0); }
-  100% { transform: translateY(0); }
-}
+    0% {
+      transform: translateY(0);
+    }
 
-.tab-pop {
-  animation: tab-pop 1.5s ease infinite;
-}
+    10% {
+      transform: translateY(-4px);
+    }
+
+    20% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .tab-pop {
+    animation: tab-pop 1.5s ease infinite;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 }

@@ -17,12 +17,13 @@ export const Footer = () => {
           <img
             className="object-contain w-[300px] m-auto"
             src={logo}
-            alt="Imagen de psintiendo al mundo"
+            alt="Imagen de psintiendo al mundo logo"
+            loading="lazy"
           />
         </picture>
         <div className="w-full py-4">
           <div className="w-fit m-auto flex gap-4">
-            {contactData.socialMedia.map((item, i) => <SocialMediaAnchor icon={item.icon} href={item.href} key={i} />)}
+            {contactData.socialMedia.map((item, i) => <SocialMediaAnchor ariaLabel={item.ariaLabel} icon={item.icon} href={item.href} key={i} />)}
           </div>
         </div>
         <div className="w-full text-center py-4 font-normal">
@@ -30,7 +31,7 @@ export const Footer = () => {
           <p>Todos los derechos reservados</p>
         </div>
         <div className="w-full text-center pb-12 text-sm">
-          <h4 ><a className="" href="https://www.linkedin.com/in/jlibonati/?locale=en_US">Website created by Jonathan Libonati</a></h4>
+          <h4 ><a aria-label="Ir al linkedin de Jonathan Libonati" href="https://www.linkedin.com/in/jlibonati/?locale=en_US">Website created by Jonathan Libonati</a></h4>
         </div>
       </div>
     </footer>

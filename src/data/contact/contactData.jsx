@@ -8,24 +8,28 @@ const whatsapp = {
   name: "whatsapp",
   icon: <WhatsappIcon className="size-6" />,
   href: "https://api.whatsapp.com/send?phone=5491141794563&text=Hola!%20Quiero%20agendar%20una%20sesión.%20%F0%9F%98%84",
+  ariaLabel: "Ir a chat de whatsapp de Psintiendo el Mundo",
 }
 
 const instagram = {
   name: "instagram",
   icon: <IgIcon className="size-6" />,
   href: "https://www.instagram.com/psintiendoelmundo/",
+  ariaLabel: "Ir al instagram de Psintiendo el Mundo",
 }
 
 const linkedin = {
   name: "linkedin",
   icon: <LinkedInIcon className="size-6" />,
   href: "https://www.linkedin.com/in/daianatelescafarley/",
+  ariaLabel: "Ir al linkedin de Daiana Telesca Farley",
 }
 
 const facebook = {
   name: "facebook",
   icon: <FbIcon className="size-6" />,
   href: "https://www.facebook.com/PSIntiendoElMundo/",
+  ariaLabel: "Ir al facebook de Psintiendo el Mundo",
 }
 
 export const contactData = {

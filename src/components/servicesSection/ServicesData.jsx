@@ -13,7 +13,8 @@ export const ServicesData = [
       "Límites y comunicación.",
       "Duelos.",
       "Crisis evolutivas."
-    ]
+    ],
+    ariaLabel: "Boton para ver información sobre Terapia online integrativa",
   },
   {
     headlineTab: "Terapia Migratoria",
@@ -27,6 +28,7 @@ export const ServicesData = [
       "Explorar tus identificaciones.",
       "Trabajar en tu identidad migratoria.",
       "Proyección personal."
-    ]
+    ],
+    ariaLabel: "Boton para ver información sobre Terapia online con enfoque migratorio",
   }
 ]

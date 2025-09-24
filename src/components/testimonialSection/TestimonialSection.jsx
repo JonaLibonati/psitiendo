@@ -42,7 +42,7 @@ export const TestimonialSection = () => {
 
   return (
     <Section id="testimonios" headline={"TESTIMONIOS"} subheadline={"Lee la experiencia de quienes ya confiaron en este espacio, en sus propias palabras."}>
-      <img src={bg} className="absolute top-[-130px] right-[-40px] w-[300px] md:top-[-80px] md:right-0 lg:w-[340px]" />
+      <img src={bg} className="absolute top-[-130px] right-[-40px] w-[300px] md:top-[-80px] md:right-0 lg:w-[340px]" loading="lazy" alt="Imagen decorativa de dibujo plano sobre testimonios positivos"/>
       <div className="flex flex-wrap justify-center items-center w-full overflow-hidden">
         <div className="order-1 md:order-2 w-fit flex justify-center pb-4">
           <div className="relative flex items-center h-[440px] md:h-[400px] lg:h-[340px]">
@@ -63,7 +63,7 @@ export const TestimonialSection = () => {
 
         <TestimonialButton
           icon={<ChevronRightIcon className={"size-6"} />}
-          ariaLabel={""}
+          ariaLabel={"Testimonio Siguiente"}
           onClick={() => {
             setIsPlaying(false);
             next();
