@@ -22,7 +22,6 @@ export const Landing = () => {
         <Column className={"mt-[50px] md:mt-[80px]"}>
           <div className="md:w-[600px] mb-[40px] md:mb-[83px] lg:mb-[56px]">
             <img className="mb-6 md:mb-0 md:max-w-[430px]" src={heroheadline} alt="Imagen de psintiendo al mundo logo" />
-            <h1 className="visually-hidden">LIC. DAIANA TELESCA FARLEY, psintiendo el mundo,  psintiendoelmundo</h1>
             <h2 className="headlineH1"><span className="block font-normal text-2xl pl-[2px]">LIC.</span> DAIANA TELESCA FARLEY</h2>
             <h2 className="subheadline max-w-[400px] mt-4 pr-[70px]">PSICÓLOGA CLÍNICA Y DE&nbsp;MIGRACIÓN</h2>
           </div>
