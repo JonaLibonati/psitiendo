@@ -1,18 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset 
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
     <loc>https://www.psintiendoelmundo.com/</loc>
     <lastmod>2025-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+
     <image:image>
-      <image:loc>https://www.tusitio.com/og-image.jpg</image:loc>
+      <image:loc>https://www.psintiendoelmundo.com/og-image.jpg</image:loc>
       <image:caption>Psicóloga Daiana Telesca Farley sonriendo y sintiendo junto con el logo de psintiendo el mundo</image:caption>
       <image:title>Hero Psicóloga Daiana Telesca Farley y Psintiendoelmundo</image:title>
-  </image:image>
+    </image:image>
+
+  </url>
+
+  <url>
+    <loc>https://www.psintiendoelmundo.com/sobre-mi/</loc>
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+
+    <image:image>
+      <image:loc>https://www.psintiendoelmundo.com/og-image.jpg</image:loc>
+      <image:caption>Psicóloga Daiana Telesca Farley sonriendo y sintiendo junto con el logo de psintiendo el mundo</image:caption>
+      <image:title>Hero Psicóloga Daiana Telesca Farley y Psintiendoelmundo</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.psintiendoelmundo.com/enfoque/</loc>
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+
+    <image:image>
+      <image:loc>https://www.psintiendoelmundo.com/og-image.jpg</image:loc>
+      <image:caption>Psicóloga Daiana Telesca Farley sonriendo y sintiendo junto con el logo de psintiendo el mundo</image:caption>
+      <image:title>Hero Psicóloga Daiana Telesca Farley y Psintiendoelmundo</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.psintiendoelmundo.com/terapias/</loc>
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+
+    <image:image>
+      <image:loc>https://www.psintiendoelmundo.com/og-image.jpg</image:loc>
+      <image:caption>Psicóloga Daiana Telesca Farley sonriendo y sintiendo junto con el logo de psintiendo el mundo</image:caption>
+      <image:title>Hero Psicóloga Daiana Telesca Farley y Psintiendoelmundo</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.psintiendoelmundo.com/testimonios/</loc>
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+
+    <image:image>
+      <image:loc>https://www.psintiendoelmundo.com/og-image.jpg</image:loc>
+      <image:caption>Psicóloga Daiana Telesca Farley sonriendo y sintiendo junto con el logo de psintiendo el mundo</image:caption>
+      <image:title>Hero Psicóloga Daiana Telesca Farley y Psintiendoelmundo</image:title>
+    </image:image>
   </url>
 
 </urlset>
+

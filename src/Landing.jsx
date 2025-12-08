@@ -1,4 +1,4 @@
-import { WhatsappButton } from "./components/global/whatsapp/WhatsappButton"
+
 import heroBg from "./assets/hero_background.webp"
 import heroPortrait from "./assets/hero_portrait.webp"
 import heroPortraitMobile from "./assets/hero_portrait_mobile.webp"
@@ -11,13 +11,20 @@ import { ServicesSection } from "./components/servicesSection/servicesSection"
 import { AboutMeSection } from "./components/aboutMe/AboutMeSection"
 import { StatsSection } from "./components/statsSection/StatsSection"
 import { lazy, Suspense } from "react";
+import { useScrollTo } from "./hooks/useScrollTo"
+import { ConfirmationPopUp } from "./components/global/popups/ConfirmationPopUp"
+import { CookieConsent } from "./components/global/CookieConsent/CookieConsent"
 
 const TestimonialSection = lazy(() => import("./components/testimonialSection/TestimonialSection").then(module => ({ default: module.TestimonialSection })))
-  ;
+const WhatsappButton = lazy(() => import( "./components/global/whatsapp/WhatsappButton").then(module => ({ default: module.WhatsappButton })))
 
-export const Landing = () => {
+export const Landing = ({ scrollTo }) => {
+
+  useScrollTo(scrollTo)
+
   return (
     <>
+      <CookieConsent />
       <section id="hero" className="flex justify-center h-[1000px] md:h-[700px] max-w-full" >
         <Column className={"mt-[50px] md:mt-[80px]"}>
           <div className="md:w-[600px] mb-[40px] md:mb-[83px] lg:mb-[56px]">
@@ -30,21 +37,18 @@ export const Landing = () => {
         <div className="absolute flex h-[inherit] w-full">
           <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroBg})` }} />
           <picture className="relative self-end ml-auto mr-auto">
-            <source media="(max-width: 767px)" srcSet={heroPortraitMobile} type="image/webp" />
             <source media="(max-width: 767px)" srcSet={heroPortraitMobile} />
             <source srcSet={heroPortrait} type="image/webp" />
             <img
               className="object-cover w-full min-h-[300px] md:min-h-[559px]"
               src={heroPortrait}
               alt="Psicóloga Daiana Telesca Farley sonriendo"
-              fetchpriority="high"
-              decoding="async"
               sizes="100vw"
             />
           </picture>
         </div>
       </section>
-
+      
       <StatsSection />
 
       <AboutMeSection />
@@ -54,11 +58,14 @@ export const Landing = () => {
       <ServicesSection />
 
       <Suspense fallback={<></>}>
-        <TestimonialSection />
+        <TestimonialSection scrollTo={scrollTo}/>
       </Suspense>
 
       <Footer />
-      <WhatsappButton />
+
+      <Suspense fallback={<></>}>
+        <WhatsappButton />
+      </Suspense>
     </>
   )
 }

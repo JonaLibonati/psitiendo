@@ -7,9 +7,10 @@ import { TestimonialCard } from "./TestimonialCard";
 import { TestimonialButton } from "./TestimonialButton";
 import { TestimonialPlayStop } from "./TestimonialPlayStop";
 import bg from "../../assets/testimonios_background.webp";
+import { useScrollTo } from "../../hooks/useScrollTo";
 
 
-export const TestimonialSection = () => {
+export const TestimonialSection = ({scrollTo}) => {
 
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -39,6 +40,10 @@ export const TestimonialSection = () => {
     }, duration);
     return () => clearInterval(interval);
   }, [isPlaying]);
+
+
+  useScrollTo(scrollTo)
+
 
   return (
     <Section id="testimonios" headline={"TESTIMONIOS"} subheadline={"Lee la experiencia de quienes ya confiaron en este espacio, en sus propias palabras."}>
