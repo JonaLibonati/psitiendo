@@ -2,9 +2,30 @@
 <html lang="es">
 
 <head>
-  
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    // Si ya aceptó antes, recuperamos del localStorage para evitar el 'denied' inicial
+    var consent = localStorage.getItem("cookie_consent");
+
+    gtag('consent', 'default', {
+      'ad_storage': consent === 'accepted' ? 'granted' : 'denied',
+      'ad_user_data': consent === 'accepted' ? 'granted' : 'denied',
+      'ad_personalization': consent === 'accepted' ? 'granted' : 'denied',
+      'analytics_storage': consent === 'accepted' ? 'granted' : 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PDZX4KSF');</script>
+
   <meta charset="utf-8">
-  <meta name="keywords" content="Daiana Telesca Farley Psicóloga psintiendoelmundo psintiendo el mundo Terapias">
+  <meta name="keywords" content="Daiana Telesca Farley, Psicóloga, psintiendoelmundo, psintiendo el mundo, Migrantes, Bienestar, Terapias">
   <meta name="description"
     content="Conoce las terapias online que brindo. Terapia online integrativa y Terapia online con enfoque migratorio.">
   <meta name="author" content="Jonathan Nicolas Libonati">
@@ -25,8 +46,7 @@
   <meta name="twitter:url" content="https://www.psintiendoelmundo.com/terapias/" />
   <meta name="twitter:image" content="https://www.psintiendoelmundo.com/og-image.jpg" />
   <!-- Fonts preload -->
-  <link rel="preload" href="/assets/Landing-BkEF8_1Y.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/assets/Landing-BkEF8_1Y.css"></noscript>
+  <link rel="stylesheet" href="/assets/Landing-BkEF8_1Y.css">
 
   <link rel="preload" href="/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
@@ -37,13 +57,13 @@
   <link rel="preload" href="/fonts/mulish/Mulish-Bold.woff2" as="font" type="font/woff2" crossorigin />
 
 
-  <link rel="preload" as="image" href="https://psintiendoelmundo.com/assets/hero_portrait_mobile-CWeGtavy.webp"
+  <link rel="preload" as="image" href="/assets/hero_portrait_mobile-CWeGtavy.webp"
     imagesizes="100vw" fetchpriority="high" />
-  <link rel="preload" as="image" href="https://psintiendoelmundo.com/assets/hero_portrait-Cr8tfrDa.webp"
+  <link rel="preload" as="image" href="/assets/hero_portrait-Cr8tfrDa.webp"
     imagesizes="100vw" />
 
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <!-- <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"> -->
+
   <link rel="canonical" href="https://www.psintiendoelmundo.com/terapias/">
   <title>Terapias ofrecidas | Lic. DAIANA TELESCA FARLEY | Psintiendo el mundo</title>
   <style>

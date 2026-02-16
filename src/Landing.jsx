@@ -12,7 +12,6 @@ import { AboutMeSection } from "./components/aboutMe/AboutMeSection"
 import { StatsSection } from "./components/statsSection/StatsSection"
 import { lazy, Suspense } from "react";
 import { useScrollTo } from "./hooks/useScrollTo"
-import { ConfirmationPopUp } from "./components/global/popups/ConfirmationPopUp"
 import { CookieConsent } from "./components/global/CookieConsent/CookieConsent"
 
 const TestimonialSection = lazy(() => import("./components/testimonialSection/TestimonialSection").then(module => ({ default: module.TestimonialSection })))
@@ -30,7 +29,7 @@ export const Landing = ({ scrollTo }) => {
           <div className="md:w-[600px] mb-[40px] md:mb-[83px] lg:mb-[56px]">
             <img className="mb-6 md:mb-0 md:max-w-[430px]" src={heroheadline} alt="Imagen de psintiendo al mundo logo" />
             <h2 className="headlineH1"><span className="block font-normal text-2xl pl-[2px]">LIC.</span> DAIANA TELESCA FARLEY</h2>
-            <h2 className="subheadline max-w-[400px] mt-4 pr-[70px]">PSICÓLOGA CLÍNICA Y DE&nbsp;MIGRACIÓN</h2>
+            <h3 className="subheadline max-w-[400px] mt-4 pr-[70px]">PSICÓLOGA CLÍNICA Y DE&nbsp;MIGRACIÓN</h3>
           </div>
           <HeroButton />
         </Column>
