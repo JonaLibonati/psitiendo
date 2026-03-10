@@ -1,0 +1,73 @@
+---
+import Column from "../../primitives/Column.astro"
+import IgIcon from "../icons/IgIcon.astro"
+import FbIcon from "../icons/FbIcon.astro"
+import LinkedInIcon from "../icons/LinkedInIcon.astro"
+import WhatsappIcon from "../icons/WhatsappIcon.astro"
+import logo from "../../../assets/logo.webp"
+import { contactData } from "../../../data/contact/contactData"
+
+const year = new Date().getFullYear()
+---
+
+<footer class="bg-camel text-black font-poppins">
+  <div class="flex flex-wrap pt-12">
+
+    <Column class="border-b border-stone-400 pb-4">
+      <p class="text-xs text-stone-600">
+        Este espacio no reemplaza una atención de emergencia. Si necesitas ayuda urgente contáctate inmediatamente con las lineas de prevención de suicidio y peligro de tu país.
+      </p>
+    </Column>
+
+    <picture class="w-full pt-10">
+      <img
+        class="object-contain w-[300px] m-auto"
+        src={logo.src}
+        alt="Imagen de psintiendo al mundo logo"
+        loading="lazy"
+      />
+    </picture>
+
+    <div class="w-full py-4">
+      <div class="w-fit m-auto flex gap-4">
+        {contactData.socialMedia.map((item) => (
+          <a
+            href={item.href}
+            aria-label={item.ariaLabel}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-brown hover:text-violet transition-colors duration-200"
+            data-ga-event={item.ga_event}
+            data-ga-label="footer"
+          >
+            {item.name === "instagram" && <IgIcon class="size-6" />}
+            {item.name === "facebook" && <FbIcon class="size-6" />}
+            {item.name === "linkedin" && <LinkedInIcon class="size-6" />}
+            {item.name === "whatsapp" && <WhatsappIcon class="size-6" />}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="w-full text-center py-4 font-normal">
+      <p>{year} &#169; Psintiendo el mundo. Lic.&nbsp;Daiana&nbsp;Telesca&nbsp;Farley.</p>
+      <p>Todos los derechos reservados</p>
+    </div>
+
+    <div class="w-full text-center pb-12 text-sm hover:underline">
+      <p>
+        <a
+          aria-label="Ir al linkedin de Jonathan Libonati"
+          href="https://www.linkedin.com/in/jlibonati/?locale=en_US"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-ga-event="linkedin_jona_click"
+          data-ga-label="footer"
+        >
+          Website created by Jonathan Libonati
+        </a>
+      </p>
+    </div>
+
+  </div>
+</footer>

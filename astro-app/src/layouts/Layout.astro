@@ -1,0 +1,151 @@
+---
+import "../index.css"
+import heroBg from "../assets/hero_background.webp"
+import heroHeadline from "../assets/hero_headline.webp"
+import heroPortrait from "../assets/hero_portrait.webp"
+import heroPortraitMobile from "../assets/hero_portrait_mobile.webp"
+
+const { robots = "index, follow" } = Astro.props
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- hero preload -->
+    <link rel="preload" as="image" href={heroBg.src} fetchpriority="high" />
+    <link rel="preload" as="image" href={heroHeadline.src} fetchpriority="high" />
+    <link rel="preload" as="image" href={heroPortrait.src} />
+    <link rel="preload" as="image" href={heroPortraitMobile.src} />
+
+    <!-- Fonts preload -->
+    <link rel="preload" href="/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins/Poppins-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/mulish/Mulish-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/mulish/Mulish-Italic.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta name="robots" content={robots} />                               
+    <meta name="theme-color" content="#5b4f4f" />                               
+    <meta name="keywords" content="Daiana Telesca Farley, Psicóloga, psintiendoelmundo, psintiendo el mundo, Migrantes, Bienestar" />
+    <meta name="description" content="Un espacio seguro de psicoterapia online para adultos o migrantes. Te acompaño a transitar con bienestar los desafios de la vida diaria y la vida en el exterior." />
+    <meta name="author" content="Jonathan Nicolas Libonati" />
+    <meta name="copyright" content="psintiendoelmundo" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lic. DAIANA TELESCA FARLEY | Psintiendo el mundo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Un espacio seguro de psicoterapia online para adultos o migrantes. Te acompaño a transitar con bienestar los desafios de la vida diaria y la vida en el exterior." />
+    <meta property="og:url" content="https://www.psintiendoelmundo.com/" />
+    <meta property="og:image" content="https://www.psintiendoelmundo.com/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lic. DAIANA TELESCA FARLEY | Psintiendo el mundo" />
+    <meta name="twitter:description" content="Un espacio seguro de psicoterapia online para adultos o migrantes. Te acompaño a transitar con bienestar los desafios de la vida diaria y la vida en el exterior." />
+    <meta name="twitter:url" content="https://www.psintiendoelmundo.com/" />
+    <meta name="twitter:image" content="https://www.psintiendoelmundo.com/og-image.jpg" />
+
+    <!-- hreflang -->            
+    <link rel="alternate" hreflang="es" href="https://www.psintiendoelmundo.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.psintiendoelmundo.com/" />
+
+    <link rel="preload" href="/fonts/mulish/Mulish-Bold.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="canonical" href="https://www.psintiendoelmundo.com/" />
+
+    <title>Lic. DAIANA TELESCA FARLEY | Psintiendo el mundo</title>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": ["Person", "MedicalBusiness"],
+        "name": "Daiana Telesca Farley",
+        "jobTitle": "Psicóloga Clínica",
+        "url": "https://www.psintiendoelmundo.com",
+        "image": "https://www.psintiendoelmundo.com/og-image.jpg",
+        "description": "Psicóloga clínica especializada en procesos migratorios. Psicoterapia online para adultos o migrantes, donde se acompaña a transitar con bienestar los desafíos de la vida diaria y la vida en el exterior.",
+        "telephone": "+5491141794563",
+        "email": "daianatelesca@gmail.com",
+        "availableLanguage": ["Spanish", "English"],
+        "areaServed": {
+          "@type": "Place",
+          "name": "Mundial — atención online"
+        },
+        "sameAs": [
+          "https://www.instagram.com/psintiendoelmundo/",
+          "https://www.facebook.com/PSIntiendoElMundo/",
+          "https://www.linkedin.com/in/daianatelescafarley/"
+        ],
+        "knowsAbout": [
+          "Psicología clínica",
+          "Procesos migratorios",
+          "DBT",
+          "Psicoterapia online",
+          "Ansiedad",
+          "Desarraigo",
+          "Choque cultural",
+          "Soledad",
+          "Vínculos",
+          "Gestión emocional",
+          "Autoestima"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios de psicoterapia online",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Terapia online integrativa",
+                "description": "Proceso de psicoterapia individual orientado a trabajar gestión emocional, ansiedad, autoestima, vínculos y duelos."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Terapia online con enfoque migratorio",
+                "description": "Psicoterapia orientada a acompañar a migrantes en los desafíos de vivir en el extranjero: adaptación, duelo migratorio, desarraigo, angustia, ansiedad, choque cultural e identidad."
+              }
+            }
+          ]
+        }
+      }
+      </script>
+
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      var consent = localStorage.getItem("cookie_consent");
+      gtag('consent', 'default', {
+        'ad_storage': consent === 'accepted' ? 'granted' : 'denied',
+        'ad_user_data': consent === 'accepted' ? 'granted' : 'denied',
+        'ad_personalization': consent === 'accepted' ? 'granted' : 'denied',
+        'analytics_storage': consent === 'accepted' ? 'granted' : 'denied',
+        'wait_for_update': 500
+      });
+    </script>
+
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PDZX4KSF');</script>
+  </head>
+  <body>
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDZX4KSF"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    <slot />
+
+  </body>
+</html>

@@ -1,0 +1,8 @@
+---
+const { value, text } = Astro.props
+---
+
+<li class="flex items-center py-8 last:py-0 first:py-0">
+    <p class="stat-value block pt-1 text-right min-w-[105px] md:min-w-auto">{value}</p>
+    <p class='block pl-2 w-fit'>{text}</p>
+</li>

@@ -1,0 +1,57 @@
+---
+import Section from "../primitives/Section.astro"
+import FaqItem from "./FaqItem.astro"
+import { faqData } from "../../data/faq/faqData.js"
+---
+
+<Section id="faq" headline="PREGUNTAS FRECUENTES" subheadline="Todo lo que necesitas saber antes de dar el primer paso.">
+  <ul class="mx-auto" id="faq-list">
+    {faqData.map((faq, i) => (
+      <FaqItem
+        pregunta={faq.pregunta}
+        respuesta={faq.respuesta}
+        index={i}
+        gaLabel={faq.ga_label}
+      />
+    ))}
+  </ul>
+</Section>
+
+<script>
+  import { dispatchGaEvent, dispatchGaAllItemsOpenedEvent } from '../../utils/analytics.ts'
+
+  const items = document.querySelectorAll<HTMLElement>('.faq-item')
+  let openIndex: number | null = null
+
+  let allOpenAtLeastOnce: Array<boolean> = new Array(items.length).fill(false);
+
+  const open = (item: HTMLElement) => {
+    item.querySelector<HTMLElement>('.answer')?.classList.replace('max-h-0', 'max-h-96')
+    item.querySelector<HTMLElement>('.answer')?.classList.replace('opacity-0', 'opacity-100')
+    item.querySelector<HTMLElement>('.chevron')?.classList.add('rotate-180')
+  }
+
+  const close = (item: HTMLElement) => {
+    item.querySelector<HTMLElement>('.answer')?.classList.replace('max-h-96', 'max-h-0')
+    item.querySelector<HTMLElement>('.answer')?.classList.replace('opacity-100', 'opacity-0')
+    item.querySelector<HTMLElement>('.chevron')?.classList.remove('rotate-180')
+  }
+
+  items.forEach((item, i) => {
+    item.addEventListener('click', (e) => {
+      if (openIndex === i) {
+        close(item)
+        openIndex = null
+      } else {
+        if (openIndex !== null) close(items[openIndex])
+        //GA all cards have been opened at least once event
+        dispatchGaAllItemsOpenedEvent(allOpenAtLeastOnce, i, 'faq_items');
+        // Ga clicks event
+        dispatchGaEvent(e.currentTarget as HTMLElement)
+        open(item)
+        openIndex = i
+      }
+    })
+  })
+</script>
+

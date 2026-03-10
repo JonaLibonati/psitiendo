@@ -1,0 +1,290 @@
+---
+import Section from "../primitives/Section.astro"
+import ChevronLeftIcon from "../global/icons/ChevronLeftIcon.astro"
+import ChevronRightIcon from "../global/icons/ChevronRightIcon.astro"
+import PlayIcon from "../global/icons/PlayIcon.astro"
+import StopIcon from "../global/icons/StopIcon.astro"
+import QuoteIcon from "../global/icons/QuoteIcon.astro"
+import bg from "../../assets/testimonios_background.webp"
+import { testimonialsData } from "../../data/testimonials/testimonialsData.js"
+---
+
+<Section id="testimonios" headline="TESTIMONIOS" subheadline="Lee la experiencia de quienes ya confiaron en este espacio, en sus propias palabras.">
+
+  <img
+    src={bg.src}
+    class="absolute top-[-130px] right-[-40px] w-[300px] md:top-[-80px] md:right-0 lg:w-[340px]"
+    loading="lazy"
+    alt="Imagen decorativa de dibujo plano sobre testimonios positivos"
+  />
+
+  <div class="flex flex-wrap justify-center items-center w-full overflow-hidden">
+
+    <!-- Cards -->
+    <div class="order-1 md:order-2 w-fit flex justify-center pb-4">
+      <div
+        id="testimonial-cards"
+        class="relative flex items-center h-[440px] md:h-[400px] lg:h-[340px]"
+      >
+        {testimonialsData.map((item, i) => (
+          <div
+            data-card={i}
+            class:list={[
+              "testimonial-card flex flex-wrap place-content-center bg-charcoal px-4 md:px-6 py-6 md:py-8 h-[100%] rounded-xl w-full md:w-[500px] lg:w-[600px] transition duration-1000",
+              i === 0 ? "relative translate-x-0 opacity-100" : "absolute translate-x-[800px] opacity-0"
+            ]}
+          >
+            <p class="flex justify-center pb-4">
+              <QuoteIcon class="size-8 md:size-10 text-white basis-full" />
+            </p>
+            <p class="md:px-4 basis-full">{item.text}</p>
+            <p class="pt-4 md:pt-6 basis-full">{item.footer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Boton anterior -->
+    <button
+      id="btn-prev"
+      aria-label="Testimonio Anterior"
+      class="order-3 md:order-1 border p-2 rounded-full size-fit cursor-pointer text-white mt-2 md:mt-0 mx-2 lg:mx-8"
+      data-ga-event="testimonios_nav"
+      data-ga-label="previous"
+    >
+      <ChevronLeftIcon class="size-6" />
+    </button>
+
+    <!-- Boton siguiente -->
+    <button
+      id="btn-next"
+      aria-label="Testimonio Siguiente"
+      class="order-5 md:order-2 border p-2 rounded-full size-fit cursor-pointer text-white mt-2 md:mt-0 mx-2 lg:mx-8"
+      data-ga-event="testimonios_nav"
+      data-ga-label="next"
+    >
+      <ChevronRightIcon class="size-6" />
+    </button>
+
+    <!-- Dots -->
+    <div class="order-2 basis-full flex justify-center gap-2 pt-4 pb-6">
+      {testimonialsData.map((_, i) => (
+        <button
+          data-dot={i}
+          class:list={[
+            "dot w-2 h-2 rounded-full transition-all duration-300 cursor-pointer",
+            i === 0 ? "bg-white scale-125" : "bg-white/40"
+          ]}
+          aria-label={`Ir al testimonio ${i + 1}`}
+          data-ga-event="testimonios_nav"
+          data-ga-label={`dot_${i + 1}`}
+        />
+      ))}
+    </div>
+
+    <!-- Play/Stop con barra de progreso -->
+    <div class="order-4 md:order-5 grow md:basis-full flex justify-center">
+      <div class="relative rounded-full overflow-hidden">
+        <div class="absolute bg-charcoal inset-0 z-0"></div>
+        <div id="progress-bar" class="absolute z-20 bg-steel-blue inset-0 translate-x-[-100%]"></div>
+        <button
+          id="btn-playstop"
+          aria-label="Detener testimonios"
+          data-ga-event="testimonios_nav"
+          data-ga-label="pause"
+          class="relative z-50 border p-2 rounded-full size-fit cursor-pointer text-white"
+        >
+          <span id="icon-stop"><StopIcon class="size-6" /></span>
+          <span id="icon-play" class="hidden"><PlayIcon class="size-6" /></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</Section>
+
+<script>
+  import { dispatchGaEvent, dispatchLocalGaEvent, dispatchGaAllItemsOpenedEvent } from '../../utils/analytics.ts'
+
+  
+
+  const cards = document.querySelectorAll<HTMLElement>('.testimonial-card')
+  const dots = document.querySelectorAll<HTMLElement>('.dot')
+  const btnPrev = document.getElementById('btn-prev')
+  const btnNext = document.getElementById('btn-next')
+  const btnPlayStop = document.getElementById('btn-playstop')
+  const progressBar = document.getElementById('progress-bar')
+  const iconStop = document.getElementById('icon-stop')
+  const iconPlay = document.getElementById('icon-play')
+  const testimonialCards = document.getElementById('testimonial-cards')
+
+  const total = cards.length
+  let currentIndex = 0
+  let isPlaying = true
+  let interval: ReturnType<typeof setInterval> | null = null
+  const duration = 5000
+  
+  let allOpenAtLeastOnce: Array<boolean> = new Array(cards.length).fill(false);
+    
+  // Mostrar card por index
+  const showCard = (index: number) => {
+    //GA all cards have been opened at least once event
+    dispatchGaAllItemsOpenedEvent(allOpenAtLeastOnce, index, 'testimonios_cards');
+    //style updates
+    cards.forEach((card, i) => {
+      card.classList.remove(
+        'relative', 'absolute',
+        'translate-x-0',
+        'translate-x-[-800px]',
+        'translate-x-[800px]',
+        'opacity-100', 'opacity-0'
+      )
+      if (i === index) {
+        card.classList.add('relative', 'translate-x-0', 'opacity-100')
+      } else if (i < index) {
+        card.classList.add('absolute', 'translate-x-[-800px]', 'opacity-0')
+      } else {
+        card.classList.add('absolute', 'translate-x-[800px]', 'opacity-0')
+      }
+    })
+    updateDots(index)
+  }
+
+  const next = () => {
+    currentIndex = (currentIndex + 1) % total
+    showCard(currentIndex)
+  }
+
+  const prev = () => {
+    currentIndex = (currentIndex - 1 + total) % total
+    showCard(currentIndex)
+  }
+
+  // Dots
+  const updateDots = (index: number) => {
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('bg-white', i === index)
+      dot.classList.toggle('scale-125', i === index)
+      dot.classList.toggle('bg-white/40', i !== index)
+    })
+  }
+
+  // Click en dots
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      dispatchGaEvent(dot);
+      isPlaying = false
+      stopAutoplay()
+      updatePlayStopIcon()
+      currentIndex = i
+      showCard(currentIndex)
+    })
+  })
+
+  // Barra de progreso
+  const resetProgressBar = () => {
+    if (!progressBar) return
+    progressBar.classList.remove('transition', 'duration-[5200ms]', 'linear')
+    progressBar.classList.add('translate-x-[-100%]')
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        progressBar.classList.add('transition', 'duration-[5200ms]', 'linear')
+        progressBar.classList.replace('translate-x-[-100%]', 'translate-x-0')
+      })
+    })
+  }
+
+  // Autoplay
+  const startAutoplay = () => {
+    if (interval) clearInterval(interval)
+    resetProgressBar()
+    interval = setInterval(() => {
+      resetProgressBar()
+      next()
+    }, duration)
+  }
+
+  const stopAutoplay = () => {
+    if (interval) clearInterval(interval)
+    interval = null
+    if (progressBar) {
+      progressBar.classList.remove('transition', 'duration-[5200ms]', 'linear')
+      progressBar.classList.replace('translate-x-0', 'translate-x-[-100%]')
+    }
+  }
+
+  const updatePlayStopIcon = () => {
+    if (isPlaying) {
+      iconStop?.classList.remove('hidden');
+      iconPlay?.classList.add('hidden');
+      btnPlayStop?.setAttribute('aria-label', 'Detener testimonios');
+      if (btnPlayStop?.dataset.gaLabel) {btnPlayStop.dataset.gaLabel = "pause"};
+    } else {
+      iconStop?.classList.add('hidden');
+      iconPlay?.classList.remove('hidden');
+      btnPlayStop?.setAttribute('aria-label', 'Reproducir testimonios');
+      if (btnPlayStop?.dataset.gaLabel) {btnPlayStop.dataset.gaLabel = "play"};
+    }
+  }
+
+  // Swipe mobile
+  let touchStartX = 0
+
+  testimonialCards?.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX
+  })
+
+  testimonialCards?.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX
+    if (Math.abs(diff) > 50) {
+      isPlaying = false
+      stopAutoplay()
+      updatePlayStopIcon()
+      if (diff > 0) {
+        dispatchLocalGaEvent("testimonios_nav","next");
+        next();
+      } else {
+        dispatchLocalGaEvent("testimonios_nav","previous");
+        prev();
+      }
+    }
+  })
+
+  // IntersectionObserver — pausa cuando no se ve
+  const section = document.getElementById('testimonios')
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (isPlaying) startAutoplay()
+      } else {
+        stopAutoplay()
+      }
+    })
+  }, { threshold: 0.3 })
+
+  if (section) observer.observe(section)
+
+  // Eventos botones
+  btnNext?.addEventListener('click', () => {
+    dispatchGaEvent(btnNext);
+    isPlaying = false
+    stopAutoplay()
+    updatePlayStopIcon()
+    next()
+  })
+
+  btnPrev?.addEventListener('click', () => {
+    dispatchGaEvent(btnPrev);
+    isPlaying = false
+    stopAutoplay()
+    updatePlayStopIcon()
+    prev()
+  })
+
+  btnPlayStop?.addEventListener('click', () => {
+    dispatchGaEvent(btnPlayStop);
+    isPlaying = !isPlaying
+    updatePlayStopIcon()
+    isPlaying ? startAutoplay() : stopAutoplay()
+  })
+</script>

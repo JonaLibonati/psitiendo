@@ -1,0 +1,61 @@
+---
+import Column from "../primitives/Column.astro"
+import MainButton from "../global/buttons/MainButton.astro"
+import heroBg from "../../assets/hero_background.webp"
+import heroPortrait from "../../assets/hero_portrait.webp"
+import heroPortraitMobile from "../../assets/hero_portrait_mobile.webp"
+import heroHeadline from "../../assets/hero_headline.webp"
+import { contactData } from "../../data/contact/contactData"
+---
+
+<section id="hero" class="flex justify-center h-[1000px] md:h-[700px] max-w-full mt-[40px] md:mt-[20px]">
+  <h1 class="vhn">Psicóloga online especializada en migración, Lic. Daiana Telesca Farley, Psintiendo el Mundo.</h1>
+  <Column class="mt-[50px] md:mt-[80px]">
+    <div class="md:w-[600px] mb-[40px] md:mb-[83px] lg:mb-[56px]">
+      <img
+        class="mb-6 md:mb-0 md:max-w-[430px]"
+        src={heroHeadline.src}
+        alt="Imagen de psintiendo al mundo logo"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <h2 class="headlineH1">
+        <span class="block font-normal text-2xl pl-[2px]">LIC.</span>
+        DAIANA TELESCA FARLEY
+      </h2>
+      <h3 class="subheadline max-w-[400px] mt-4 pr-[70px]">
+        PSICÓLOGA CLÍNICA Y DE&nbsp;MIGRACIÓN
+      </h3>
+    </div>
+    <MainButton
+      text="AGENDAR SESIÓN"
+      href={contactData.whatsapp.href}
+      ariaLabel="Agendar sesión con la psicóloga Daiana Telesca Farley"
+    />
+  </Column>
+
+  <div class="absolute flex h-[inherit] w-full">
+    <img
+      src={heroBg.src}
+      alt=""
+      fetchpriority="high"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+      aria-hidden="true"
+    />
+    <picture class="relative self-end ml-auto mr-auto">
+      <source media="(max-width: 767px)" srcset={heroPortraitMobile.src} />
+      <source srcset={heroPortrait.src} type="image/webp" />
+      <img
+        class="object-cover w-full min-h-[300px] md:min-h-[559px]"
+        src={heroPortrait.src}
+        alt="Psicóloga Daiana Telesca Farley sonriendo"
+        sizes="100vw"
+        fetchpriority="low"
+        decoding="async"
+        loading="eager"
+      />
+    </picture>
+  </div>
+
+</section>

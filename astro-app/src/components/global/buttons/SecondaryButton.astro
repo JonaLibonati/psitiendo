@@ -1,0 +1,21 @@
+---
+const { text, href, ariaLabel, gaLabel } = Astro.props;
+---
+
+<a
+    href={href}
+    aria-label={ariaLabel}
+    class="button
+              text-white text-sm tracking-widest
+              px-6 py-2
+              border-2 border-dashed border-white/70
+              hover:border-white hover:bg-white/10
+              transition-all duration-300
+              rotate-[-4deg] hover:rotate-0
+              focus:rotate-0 focus:border-solid focus:text-white"
+    target="_blank"
+    data-ga-event="whatsapp_click"
+    data-ga-label={gaLabel}
+>
+    {text}
+</a>

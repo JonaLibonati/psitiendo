@@ -1,0 +1,199 @@
+---
+import Section from "../primitives/Section.astro";
+import paper from "../../assets/paper_background.webp";
+import { postIts } from "../../data/aboutMe/aboutMeData";
+---
+
+<Section
+  id="sobre-mi"
+  headline="SOBRE MÍ"
+  subheadline="Conoce quién soy, mi camino y lo que me inspira a acompañar"
+  pBottom="pb-0"
+>
+  <div class="relative flex flex-wrap justify-center">
+    <!-- Fondo papel -->
+    <div class="absolute flex justify-center">
+      <img
+        src={paper.src}
+        class="m-auto h-[910px] md:max-h-[760px] md:w-[1000px] max-w-none object-fill"
+        alt="Fondo decorativo de papel"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Contenidos -->
+    <div
+      class="relative pt-[135px] md:pt-[100px] h-[650px] md:h-[460px] md:px-[100px] lg:px-[230px]"
+    >
+      <!-- Contenido 0 - visible por defecto -->
+      <div
+        id="content-0"
+        class="about-content block text-charcoal leading-relaxed whitespace-pre-line"
+      >
+        <h4 class="md:pt-[26px]">¿Quién soy?</h4>
+        <p>
+          ¡Hola! Soy Dai, psicóloga clínica nacida en Bs.As. Argentina 🇦🇷 y migrante ✈️. Viví casi seis años en Cd. de México 🇲🇽 y actualmente preparo mi próxima migración.
+        </p>
+        <p>
+          🧠 Acompaño a personas en sus distintas etapas a gestionar cambios, duelos, ansiedades, vínculos, decisiones importantes, desafíos emocionales y procesos migratorios. Considero un privilegio la confianza de quienes eligen este espacio, y valoro profundamente poder ser parte de sus procesos 🫂.
+        </p>
+        <p>
+          Me apasiona la interculturalidad, los idiomas y acentos, cantar, la tranquilidad de la naturaleza y los gatos 🌱.
+        </p>
+      </div>
+
+      <!-- Contenido 1 - oculto por defecto -->
+      <div
+        id="content-1"
+        class="about-content hidden text-charcoal leading-relaxed"
+      >
+        <h4>Mi recorrido</h4>
+        <h5 class="text-base pt-4">🧠 Consultorio online</h5>
+        <p>
+          Acompañamiento a jóvenes, adultos y migrantes en psicoterapia personalizada bilingüe.
+        </p>
+        <h5 class="text-base pt-4">📚 Ámbito educativo</h5>
+        <p>
+          Orientación escolar y acompañamiento a niños con dificultades emocionales, conductuales o discapacidad.
+        </p>
+        <h5 class="text-base pt-4">💼 Ámbito empresarial</h5>
+        <p>
+          Psicóloga admisora bilingüe de consultantes de toda LATAM para programa EAP.
+        </p>
+        <h5 class="text-base pt-4">🫂 Inicios clínicos</h5>
+        <p>
+          Acompañante Terapéutica y escolar en discapacidad, psicosis, TCA, adicciones y depresión.
+        </p>
+      </div>
+
+      <!-- Contenido 2 - oculto por defecto -->
+      <div
+        id="content-2"
+        class="about-content hidden text-charcoal leading-relaxed whitespace-pre-line"
+      >
+        <h4 class="md:pt-[26px]">Lo que migrar me enseñó...</h4>
+        <p>
+          Migrar transforma profundamente ✈️💫: implica despedidas 💔, aprendizajes 📖, comenzar de nuevo 🌅 y encontrar formas de sentirse en casa en lo desconocido 🌍.
+        </p>
+        <p>
+          Yo también atravesé ese camino y sé lo desafiante que puede ser. Esa experiencia no solo marcó mi identidad sino que también cambió mi manera de acompañar procesos 🫂✨. Me permite ofrecer un espacio seguro, empático y cercano para sostener emociones, duelos y nuevos comienzos 💬💛.
+        </p>
+        <p>
+          Construir lejos del lugar de origen no es fácil, pero hacerlo acompañado puede dar fuerza y resiliencia 🌱🌟.
+        </p>
+      </div>
+    </div>
+
+    <!-- Post-its -->
+    <div class="relative flex w-full md:pt-[20px]">
+      <!-- Post-it izquierdo -->
+      <button
+        id="postit-left"
+        class="flex justify-center relative basis-1/2 cursor-pointer h-[200px] md:justify-end"
+        aria-label="Ver contenido de la nota adhesiva izquierda"
+        data-index="1"
+        data-ga-label={postIts[1].ga_label}
+        data-ga-event="postit_click"
+      >
+        <img
+          id="postit-left-img"
+          src={postIts[1].imgLeft}
+          class="absolute top-0 w-[200px] md:w-[230px] max-w-none"
+          alt="Nota adhesiva izquierda"
+          loading="lazy"
+        />
+      </button>
+
+      <!-- Post-it derecho -->
+      <button
+        id="postit-right"
+        class="flex justify-center relative basis-1/2 cursor-pointer h-[200px] md:justify-start"
+        aria-label="Ver contenido de la nota adhesiva derecha"
+        data-index="2"
+        data-ga-label={postIts[2].ga_label}
+        data-ga-event="postit_click"
+      >
+        <img
+          id="postit-right-img"
+          src={postIts[2].imgRight}
+          class="absolute top-0 w-[200px] md:w-[230px] max-w-none"
+          alt="Nota adhesiva derecha"
+          loading="lazy"
+        />
+      </button>
+    </div>
+  </div>
+</Section>
+
+<script>
+  import { postIts } from "../../data/aboutMe/aboutMeData";
+  import { dispatchGaAllItemsOpenedEvent, dispatchGaEvent } from '../../utils/analytics.ts'
+
+  // Estado inicial
+  // selected = 0, left = 1, right = 2
+  let selectedIndex = 0;
+  let leftIndex = 1;
+  let rightIndex = 2;
+
+  const content = document.querySelectorAll<HTMLElement>(".about-content");
+
+  let allOpenAtLeastOnce: Array<boolean> = new Array(content.length).fill(false);
+  allOpenAtLeastOnce[selectedIndex] = true;
+
+  const showContent = (index: number) => {
+    //GA all cards have been opened at least once event
+    dispatchGaAllItemsOpenedEvent(allOpenAtLeastOnce, index, 'sobre_mi_postits');
+    content.forEach((el) => {
+      el.classList.add("hidden");
+    });
+    document.getElementById(`content-${index}`)?.classList.remove("hidden");
+  };
+
+  const updatePostItImages = () => {
+    const leftImg = document.getElementById(
+      "postit-left-img",
+    ) as HTMLImageElement;
+    const rightImg = document.getElementById(
+      "postit-right-img",
+    ) as HTMLImageElement;
+    if (leftImg) {
+      leftImg.dataset.gaLabel = postIts[leftIndex].ga_label;
+      leftImg.src = postIts[leftIndex].imgLeft;
+    }
+    if (rightImg) {
+      rightImg.dataset.gaLabel = postIts[rightIndex].ga_label;
+      rightImg.src = postIts[rightIndex].imgRight;
+    }
+  };
+
+  const updatePostItGaData = () => {
+    const leftBtn = document.getElementById("postit-left") as HTMLButtonElement;
+    const rightBtn = document.getElementById(
+      "postit-right",
+    ) as HTMLButtonElement;
+    if (leftBtn) leftBtn.dataset.gaLabel = postIts[leftIndex].ga_label;
+    if (rightBtn) rightBtn.dataset.gaLabel = postIts[rightIndex].ga_label;
+  };
+
+  // Click post-it izquierdo
+  document.getElementById("postit-left")?.addEventListener("click", (e) => {
+    dispatchGaEvent(e.currentTarget as HTMLElement)
+    const prevSelected = selectedIndex;
+    selectedIndex = leftIndex;
+    leftIndex = prevSelected;
+    showContent(selectedIndex);
+    updatePostItImages();
+    updatePostItGaData();
+  });
+
+  // Click post-it derecho
+  document.getElementById("postit-right")?.addEventListener("click", (e) => {
+    dispatchGaEvent(e.currentTarget as HTMLElement)
+    const prevSelected = selectedIndex;
+    selectedIndex = rightIndex;
+    rightIndex = prevSelected;
+    showContent(selectedIndex);
+    updatePostItImages();
+    updatePostItGaData();
+  });
+</script>
