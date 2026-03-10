@@ -1,0 +1,26 @@
+---
+import ChevronDownIcon from "../global/icons/ChevronDownIcon.astro"
+
+const { pregunta, respuesta, index, gaLabel } = Astro.props
+---
+
+<li
+  class="faq-item group py-4 cursor-pointer border-b last:border-0 border-brown/30"
+  data-index={index}
+  data-ga-event="faq_click"
+  data-ga-label={gaLabel}
+>
+  <div class="flex items-center justify-between gap-4">
+    <h3 class="font-poppins font-semibold text-lg text-brown grow group-hover:text-violet transition-colors duration-200">
+      {pregunta}
+    </h3>
+    <span class="chevron text-brown shrink-0 transition-transform duration-200">
+      <ChevronDownIcon class="size-5" />
+    </span>
+  </div>
+  <div class="answer max-h-0 overflow-hidden opacity-0 transition-all duration-300">
+    <p class="pt-3 font-mulish text-charcoal text-base leading-relaxed whitespace-pre-line">
+      {respuesta}
+    </p>
+  </div>
+</li>

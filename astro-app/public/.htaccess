@@ -1,0 +1,45 @@
+RewriteEngine On
+
+# --- Forzar HTTPS y WWW en una sola regla ---
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.psintiendoelmundo.com/$1 [L,R=301]
+
+# --- Redirects 301 - URLs antiguas ---
+Redirect 301 /enfoque/ https://www.psintiendoelmundo.com/#enfoque
+Redirect 301 /sobre-mi/ https://www.psintiendoelmundo.com/#sobre-mi
+Redirect 301 /terapias/ https://www.psintiendoelmundo.com/#terapias
+Redirect 301 /testimonios/ https://www.psintiendoelmundo.com/#testimonios
+
+# Activar compresión Gzip
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json image/svg+xml font/woff font/woff2
+</IfModule>
+
+# Cache de navegador
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/ico "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Headers de seguridad
+<IfModule mod_headers.c>
+  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Página 404
+ErrorDocument 404 /404.html

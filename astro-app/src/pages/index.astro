@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Nav from '../components/global/nav/Nav.astro'
+import StatsSection from '../components/statsSection/StatsSection.astro'
+import FocusSection from '../components/focusSection/FocusSection.astro'
+import FaqSection from '../components/faqSection/FaqSection.astro'
+import CtaSection from '../components/ctaSection/CtaSection.astro'
+import Footer from '../components/global/footer/Footer.astro'
+import Hero from '../components/hero/Hero.astro'
+import AboutMeSection from '../components/AboutMe/AboutMeSection.astro'
+import ServicesSection from '../components/servicesSection/ServicesSection.astro'
+import TestimonialSection from '../components/testimonialSection/TestimonialSection.astro'
+import WhatsappButton from '../components/global/whatsapp/WhatsappButton.astro'
+import CookiesConsent from '../components/global/cookiesConsent/CookiesConsent.astro'
+import Analytics from '../components/global/analytics/Analytics.astro'
+---
+
+<Layout>
+  <CookiesConsent />
+  <Nav />
+  <main id="root" style="overflow:hidden">
+    <Hero />
+    <StatsSection />
+    <AboutMeSection />
+    <FocusSection />
+    <ServicesSection />
+    <TestimonialSection />
+    <FaqSection />
+    <CtaSection />
+  </main>
+  <Footer />
+  <WhatsappButton />
+  <Analytics />
+</Layout>

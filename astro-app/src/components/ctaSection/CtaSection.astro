@@ -1,0 +1,31 @@
+---
+import Column from "../primitives/Column.astro"
+import WhatsappIcon from "../global/icons/WhatsappIcon.astro"
+import { contactData } from "../../data/contact/contactData"
+---
+
+<section id="cta" class="bg-gradient-to-b from-white via-camel/30 to-camel">
+  <Column class="py-[100px] flex flex-col items-center text-center gap-8">
+
+    <p class="font-poppins font-semibold text-xl md:text-2xl text-brown max-w-xl leading-relaxed">
+      Empezar terapia no es un signo de debilidad, sino de compromiso con tu bienestar.
+    </p>
+    <p class="font-mulish text-lg text-charcoal max-w-lg">
+      Si sientes que este puede ser tu espacio, puedes escribirme para coordinar una primera sesión.
+    </p>
+
+    <a
+      href={contactData.whatsapp.href}
+      aria-label={contactData.whatsapp.ariaLabel}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="button flex items-center gap-3 px-6 py-3 bg-whatsapp-green text-white rounded-full border border-white shadow-lg hover:brightness-90 transition-all duration-300 cursor-pointer"
+      data-ga-event="whatsapp_click"
+      data-ga-label="cta_before_footer"
+    >
+      <WhatsappIcon class="size-5" />
+      ESCRÍBEME Y AGENDA
+    </a>
+
+  </Column>
+</section>

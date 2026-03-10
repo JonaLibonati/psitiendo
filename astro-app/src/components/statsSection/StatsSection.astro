@@ -1,0 +1,19 @@
+---
+import Section from "../primitives/Section.astro"
+import StatItem from "./StatItem.astro"
+
+const stats = [
+  { value: "+6", text: "años brindando terapias online" },
+  { value: "+9", text: "años de exp. clínica" },
+  { value: "+80", text: "pacientes atendidos" },
+]
+---
+
+<Section id="estadisticas">
+  <h2 class="vhn">Logros e impacto</h2>
+  <ul class="grid md:grid-cols-[250px_1fr_1fr] lg:grid-cols-[300px_240px_300px] md:gap-4 place-content-center">
+    {stats.map((stat) => (
+      <StatItem value={stat.value} text={stat.text}/>
+    ))}
+  </ul>
+</Section>

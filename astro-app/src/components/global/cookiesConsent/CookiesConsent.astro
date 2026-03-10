@@ -1,0 +1,82 @@
+---
+import XIcon from "../icons/XIcon.astro"
+import CheckIcon from "../icons/CheckIcon.astro"
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-10 w-full px-4 z-[9999] translate-y-[200%] transition-all duration-500 ease-in-out"
+>
+  <div class="right-0 left-0 m-auto grid grid-cols-[1fr_fit-content(0)_fit-content(0)] max-w-[900px] items-center bg-gray-light p-3 border-2 border-gray-light rounded-md text-white">
+    <p class="text-white text-sm md:text-base">
+      Usamos cookies de Google Analytics para mejorar tu experiencia de usuario. Puedes aceptar o declinarlas.
+    </p>
+
+    <!-- Aceptar — destacado -->
+    <button
+      id="cookie-accept"
+      aria-label="Aceptar cookies"
+      class="flex items-center gap-1 mr-4 px-3 py-1 rounded-full cursor-pointer bg-steel-blue hover:bg-brown transition-colors duration-200"
+    >
+      <span class="hidden md:inline font-poppins font-semibold text-sm">Aceptar</span>
+      <CheckIcon class="size-5" />
+    </button>
+
+    <!-- Rechazar — discreto -->
+    <button
+      id="cookie-decline"
+      aria-label="Rechazar cookies"
+      class="flex items-center gap-1 px-3 py-1 rounded-full cursor-pointer text-white/60 hover:text-white transition-colors duration-200"
+    >
+      <span class="hidden md:inline font-poppins font-semibold text-sm">Rechazar</span>
+      <XIcon class="size-5" />
+    </button>
+
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner')
+  const btnAccept = document.getElementById('cookie-accept')
+  const btnDecline = document.getElementById('cookie-decline')
+
+  const showBanner = () => {
+    // Pequeño delay para que la transición se vea al cargar la página
+    setTimeout(() => {
+      banner?.classList.replace('translate-y-[200%]', 'translate-y-0')
+    }, 800)
+  }
+
+  const hideBanner = () => {
+    banner?.classList.replace('translate-y-0', 'translate-y-[200%]')
+  }
+
+  const updateGtag = (status: 'granted' | 'denied') => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        ad_storage: status,
+        ad_user_data: status,
+        ad_personalization: status,
+        analytics_storage: status,
+      })
+    }
+  }
+
+  // Mostrar banner si no hay consentimiento o fue rechazado
+  const consent = localStorage.getItem('cookie_consent')
+  if (!consent) {
+    showBanner()
+  }
+
+  btnAccept?.addEventListener('click', () => {
+    localStorage.setItem('cookie_consent', 'accepted')
+    updateGtag('granted')
+    hideBanner()
+  })
+
+  btnDecline?.addEventListener('click', () => {
+    localStorage.setItem('cookie_consent', 'rejected')
+    updateGtag('denied')
+    hideBanner()
+  })
+</script>

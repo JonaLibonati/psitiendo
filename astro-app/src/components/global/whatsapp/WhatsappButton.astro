@@ -1,0 +1,16 @@
+---
+import WhatsappIcon from "../icons/WhatsappIcon.astro"
+import { contactData } from "../../../data/contact/contactData.js"
+---
+
+<a
+  href={contactData.whatsapp.href}
+  class="fixed bottom-0 right-0 m-4 z-[100] bg-whatsapp-green rounded-full p-3 shadow-md hover:shadow-lg transition-shadow"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Ir al chat de whatsapp de Daiana Telesca Farley"
+  data-ga-event="whatsapp_click"
+  data-ga-label="whatsapp_floating_button"
+>
+  <WhatsappIcon class="size-10 text-white" />
+</a>

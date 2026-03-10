@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro'
+import WhatsappButton from '../components/global/whatsapp/WhatsappButton.astro'
+---
+
+<Layout robots="noindex, nofollow">
+  <div id="404Page" class="flex flex-col bg-camel items-center justify-center min-h-screen text-center px-4 gap-6">
+    <h1 class="text-8xl md:text-9xl">404</h1>
+    <h2 class="subheadline">Esta página no existe.</h2>
+    <p class="font-mulish text-charcoal max-w-md text-lg">
+      Puede que el enlace esté roto o que la página haya sido movida.
+    </p>
+    <div class="flex gap-4 flex-wrap justify-center">
+      <a
+        href="/"
+        class="button px-6 py-3 bg-steel-blue rounded-full border border-dark-gray shadow-lg hover:bg-brown transition cursor-pointer"
+      >
+        VOLVER AL INICIO
+      </a>
+    </div>
+  </div>
+  <WhatsappButton />
+</Layout>
