@@ -1,65 +1,70 @@
 <script>
-  import { dispatchGaResidenceTimeEvent } from "../../../utils/analytics";
+  import { dispatchGaEngagementTimeByContent } from "../../../utils/analytics";
 
-  const trackEvent = (eventName: string, label: string) => {
-    console.log(eventName, label, window.gtag);
+  interface GaEventParams {
+    event_label?: string
+    threshold_seconds?: number
+    reading_time_seconds?: number
+  }
+
+  const trackEvent = (eventName: string, params: GaEventParams) => {
     if (typeof window.gtag === "function") {
-      window.gtag("event", eventName, { event_label: label });
+      window.gtag("event", eventName, params)
     }
-  };
+  }
 
   //Tracking whapsapp clicks
   document
     .querySelectorAll<HTMLElement>('[data-ga-event="whatsapp_click"]')
     .forEach((el) => {
-      const label = el.dataset.gaLabel || "desconocido";
+      const event_label = el.dataset.gaLabel || "desconocido";
       el.addEventListener("click", () => {
-        trackEvent("whatsapp_click", label);
+        trackEvent("whatsapp_click", {event_label});
       });
     });
 
   //Tracking Terapias Ofrecidas clicks
   document.querySelectorAll<HTMLElement>('[data-ga-event="terapias_ofrecidas_click"]').forEach(el => {
-    const label = el.dataset.gaLabel || "desconocido";
+    const event_label = el.dataset.gaLabel || "desconocido";
     el.addEventListener("click", () => {
-        trackEvent("terapias_ofrecidas_click", label);
+        trackEvent("terapias_ofrecidas_click", {event_label});
       });
   })
 
   //Tracking Nav clicks
   document.querySelectorAll<HTMLElement>('[data-ga-event="nav_click"]').forEach(el => {
-    const label = el.dataset.gaLabel || "desconocido";
+    const event_label = el.dataset.gaLabel || "desconocido";
     el.addEventListener("click", () => {
-        trackEvent("nav_click", label);
+        trackEvent("nav_click", {event_label});
       });
   })
 
   //Tracking social media clicks
   document.querySelectorAll<HTMLElement>('[data-ga-event="instagram_click"]').forEach(el => {
-    const label = el.dataset.gaLabel || "desconocido";
+    const event_label = el.dataset.gaLabel || "desconocido";
     el.addEventListener("click", () => {
-        trackEvent("instagram_click", label);
+        trackEvent("instagram_click", {event_label});
       });
   })
 
   document.querySelectorAll<HTMLElement>('[data-ga-event="facebook_click"]').forEach(el => {
-    const label = el.dataset.gaLabel || "desconocido";
+    const event_label = el.dataset.gaLabel || "desconocido";
     el.addEventListener("click", () => {
-        trackEvent("facebook_click", label);
+        trackEvent("facebook_click", {event_label});
       });
   })
 
   document.querySelectorAll<HTMLElement>('[data-ga-event="linkedin_click"]').forEach(el => {
-    const label = el.dataset.gaLabel || "desconocido";
+    const event_label = el.dataset.gaLabel || "desconocido";
     el.addEventListener("click", () => {
-        trackEvent("linkedin_click", label);
+        trackEvent("linkedin_click", {event_label});
       });
   })
 
   document.querySelectorAll<HTMLElement>('[data-ga-event="linkedin_jona_click"]').forEach(el => {
-    const label = el.dataset.gaLabel || "desconocido";
+    const event_label = el.dataset.gaLabel || "desconocido";
     el.addEventListener("click", () => {
-        trackEvent("linkedin_jona_click", label);
+        trackEvent("linkedin_jona_click", {event_label});
       });
   })
 
@@ -72,32 +77,42 @@
   
   if (aboutMeSection) {
     aboutMeSection.dataset.gaLabel = "sobre_mi";
-    dispatchGaResidenceTimeEvent(aboutMeSection, [5,10,30])
+    dispatchGaEngagementTimeByContent(aboutMeSection)
   }
 
   if (focusSection) {
     focusSection.dataset.gaLabel = "enfoque";
-    dispatchGaResidenceTimeEvent(focusSection, [5,10,30])
+    dispatchGaEngagementTimeByContent(focusSection);
   }
 
   if (servicesSection) {
     servicesSection.dataset.gaLabel = "terapias_ofrecidas";
-    dispatchGaResidenceTimeEvent(servicesSection, [5,10,30])
+    dispatchGaEngagementTimeByContent(servicesSection);
   }
   
   if (testimonialSection) {
     testimonialSection.dataset.gaLabel = "testimonios";
-    dispatchGaResidenceTimeEvent(testimonialSection, [5,10,30])
+    dispatchGaEngagementTimeByContent(testimonialSection);
   }
 
   if (faqSection) {
     faqSection.dataset.gaLabel = "preguntas_frecuentes";
-    dispatchGaResidenceTimeEvent(faqSection, [5,10,30])
+    dispatchGaEngagementTimeByContent(faqSection);
   }
 
   // Listening ga:track custom event. Used in focusSection, faqSection and aboutMeSection and testimonialSection
   document.addEventListener('ga:track', (e: Event) => {
-    const { event_name, event_label } = (e as CustomEvent).detail
-    trackEvent(event_name, event_label)
+  const {
+    event_name,
+    event_label,
+    threshold_seconds,
+    reading_time_seconds
+  } = (e as CustomEvent).detail
+
+  trackEvent(event_name, {
+    event_label,
+    threshold_seconds,
+    reading_time_seconds,
   })
+})
 </script>

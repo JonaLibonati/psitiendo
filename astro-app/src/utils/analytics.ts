@@ -32,49 +32,141 @@ export const dispatchGaAllItemsOpenedEvent = (
   }
 }
 
-// Tracking residence time with IntersectionObserver
+export const getReadingTimeSeconds = (target: HTMLElement): number => {
+  const textElements = target.querySelectorAll('p, h2, h3, h4, h5')
+  const text = Array.from(textElements)
+    .map(el => el.textContent || '')
+    .join(' ')
+  const words = text.trim().split(/\s+/).length
+  return Math.ceil(words / 4)
+}
 
-export const dispatchGaResidenceTimeEvent = (target: HTMLElement, timeLimit: number | Array<number>) => {
-  let isIntersecting: boolean = false;
-  let timeOutList: Array<ReturnType<typeof setTimeout>> = [];
+export const dispatchGaEngagementTimeEvent = (
+  target: HTMLElement,
+  timeLimit: number | Array<number>,
+  percentages?: Array<number>
+) => {
+  let isIntersecting: boolean = false
+  let isPageVisible: boolean = !document.hidden
+  let timeOutList: Array<ReturnType<typeof setTimeout>> = []
+  let sectionEntryTime: number | null = null
 
-  const length = typeof timeLimit === 'number' ? 1 : timeLimit.length
+  const limits = typeof timeLimit === 'number' ? [timeLimit] : timeLimit
+  const length = limits.length
   let isTracked: Array<boolean> = new Array(length).fill(false)
+  let remainingTimes: Array<number> = limits.map(t => t * 1000)
 
-  const timeOut = (timeLimit: number, i: number) : NodeJS.Timeout => {
-    return setTimeout(() => {
-      if (isIntersecting && !isTracked[i]) {
-        dispatchLocalGaEvent(`residence_time_greater_than_${timeLimit}sec`, target.dataset.gaLabel);
-        isTracked[i] = true;
-        return
-      };
-    }, timeLimit*1000)
+  const getEventName = (i: number): string => {
+    if (percentages && percentages[i]) {
+      return `engagement_${percentages[i]}`
+    }
+    return `engagement_time_${limits[i]}sec`
   }
 
-  const residenceTimeGaObserver = new IntersectionObserver((entries) => {
+  const timeOut = (
+    limit: number,
+    i: number,
+    delay: number
+  ): ReturnType<typeof setTimeout> => {
+    return setTimeout(() => {
+      if (isIntersecting && isPageVisible && !isTracked[i]) {
+        document.dispatchEvent(
+          new CustomEvent('ga:track', {
+            detail: {
+              event_name: getEventName(i),
+              event_label: target.dataset.gaLabel,
+              threshold_seconds: limit,
+              reading_time_seconds: limits[limits.length - 1],
+            }
+          })
+        )
+        isTracked[i] = true
+      }
+    }, delay)
+  }
+
+  const startTimers = () => {
+    sectionEntryTime = Date.now()
+    limits.forEach((limit, i) => {
+      if (!isTracked[i] && remainingTimes[i] > 0) {
+        timeOutList.push(timeOut(limit, i, remainingTimes[i]))
+      }
+    })
+  }
+
+  const pauseTimers = () => {
+    if (sectionEntryTime === null) return
+
+    // Calculate time spent in section before pausing
+    const timeSpentInSection = Date.now() - sectionEntryTime
+
+    // Update remaining times discounting time already spent
+    remainingTimes = remainingTimes.map((remaining, i) => {
+      if (isTracked[i]) return 0
+      return Math.max(0, remaining - timeSpentInSection)
+    })
+
+    timeOutList.forEach(el => clearTimeout(el))
+    timeOutList = []
+    sectionEntryTime = null
+  }
+
+  const resumeTimers = () => {
+    // isTracked protects against double firing
+    // Only starts pending timers with updated remaining time
+    startTimers()
+  }
+
+  const resetTimers = () => {
+    timeOutList.forEach(el => clearTimeout(el))
+    timeOutList = []
+    sectionEntryTime = null
+    // Reset remaining times to original values
+    remainingTimes = limits.map(t => t * 1000)
+  }
+
+  const engagementTimeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-         //Save intersection state
-        isIntersecting = true;
-        //Run time outs
-        if (typeof timeLimit === "number") {
-          timeOutList.push(timeOut(timeLimit, 0))
-        } else {
-          timeLimit.forEach((time, i) => {
-            timeOutList.push(timeOut(time, i))
-          })
-        }
+        // Save intersection state
+        isIntersecting = true
+        // Only start if page is visible
+        if (isPageVisible) startTimers()
       } else {
-        //Resets the clock if user leaves the section before the limit time ends.
-        timeOutList.forEach(el => {
-          clearTimeout(el)
-        })
-        //Save intersection state
-        isIntersecting = false;
+        // Pause - accumulates time
+        if (isPageVisible) pauseTimers()
+        // Save intersection state
+        isIntersecting = false
       }
     })
   }, { threshold: 0.5 })
 
-  residenceTimeGaObserver.observe(target)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      // User left — pause timers
+      isPageVisible = false
+      if (isIntersecting) pauseTimers()
+    } else {
+      // User returned — resume timers
+      isPageVisible = true
+      if (isIntersecting) resumeTimers()
+    }
+  })
+
+  engagementTimeObserver.observe(target)
+}
+
+export const dispatchGaEngagementTimeByContent = (target: HTMLElement) => {
+  const readingTime = getReadingTimeSeconds(target)
+
+  const thresholds = [
+    Math.round(readingTime * 0.10),
+    Math.round(readingTime * 0.25),
+    Math.round(readingTime * 0.50),
+    Math.round(readingTime * 0.75),
+    Math.round(readingTime * 1.00),
+  ]
+
+  dispatchGaEngagementTimeEvent(target, thresholds, [10, 25, 50, 75, 100])
 }
 
