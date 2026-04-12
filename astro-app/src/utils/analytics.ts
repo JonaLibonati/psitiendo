@@ -44,7 +44,10 @@ export const getReadingTimeSeconds = (target: HTMLElement): number => {
 export const dispatchGaEngagementTimeEvent = (
   target: HTMLElement,
   timeLimit: number | Array<number>,
-  percentages?: Array<number>
+  option?: {
+    percentages?: Array<number>
+    threshold?: number | number[],
+  }
 ) => {
   let isIntersecting: boolean = false
   let isPageVisible: boolean = !document.hidden
@@ -57,8 +60,8 @@ export const dispatchGaEngagementTimeEvent = (
   let remainingTimes: Array<number> = limits.map(t => t * 1000)
 
   const getEventName = (i: number): string => {
-    if (percentages && percentages[i]) {
-      return `engagement_${percentages[i]}`
+    if (option?.percentages && option?.percentages[i]) {
+      return `engagement_${option.percentages[i]}`
     }
     return `engagement_time_${limits[i]}sec`
   }
@@ -117,14 +120,6 @@ export const dispatchGaEngagementTimeEvent = (
     startTimers()
   }
 
-  const resetTimers = () => {
-    timeOutList.forEach(el => clearTimeout(el))
-    timeOutList = []
-    sectionEntryTime = null
-    // Reset remaining times to original values
-    remainingTimes = limits.map(t => t * 1000)
-  }
-
   const engagementTimeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -139,7 +134,7 @@ export const dispatchGaEngagementTimeEvent = (
         isIntersecting = false
       }
     })
-  }, { threshold: 0.5 })
+  }, { threshold: option?.threshold || 0.5 })
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
@@ -156,7 +151,7 @@ export const dispatchGaEngagementTimeEvent = (
   engagementTimeObserver.observe(target)
 }
 
-export const dispatchGaEngagementTimeByContent = (target: HTMLElement) => {
+export const dispatchGaEngagementTimeByContent = (target: HTMLElement, threshold: number | number[] | undefined) => {
   const readingTime = getReadingTimeSeconds(target)
 
   const thresholds = [
@@ -167,6 +162,6 @@ export const dispatchGaEngagementTimeByContent = (target: HTMLElement) => {
     Math.round(readingTime * 1.00),
   ]
 
-  dispatchGaEngagementTimeEvent(target, thresholds, [10, 25, 50, 75, 100])
+  dispatchGaEngagementTimeEvent(target, thresholds, {percentages: [10, 25, 50, 75, 100], threshold: threshold} )
 }
 

@@ -32,3 +32,13 @@ import Analytics from '../components/global/analytics/Analytics.astro'
   <WhatsappButton />
   <Analytics />
 </Layout>
+
+<script>
+  import { dispatchGaEngagementTimeEvent } from "../utils/analytics";
+
+  const main = document.querySelector<HTMLElement>("main");
+
+  console.dir(main)
+
+  if (main) dispatchGaEngagementTimeEvent(main, 45, { threshold : 0.05 });
+</script>

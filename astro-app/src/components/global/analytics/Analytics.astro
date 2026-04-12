@@ -77,27 +77,27 @@
   
   if (aboutMeSection) {
     aboutMeSection.dataset.gaLabel = "sobre_mi";
-    dispatchGaEngagementTimeByContent(aboutMeSection)
+    dispatchGaEngagementTimeByContent(aboutMeSection, 0.4)
   }
 
   if (focusSection) {
     focusSection.dataset.gaLabel = "enfoque";
-    dispatchGaEngagementTimeByContent(focusSection);
+    dispatchGaEngagementTimeByContent(focusSection, 0.1);
   }
 
   if (servicesSection) {
     servicesSection.dataset.gaLabel = "terapias_ofrecidas";
-    dispatchGaEngagementTimeByContent(servicesSection);
+    dispatchGaEngagementTimeByContent(servicesSection,0.4);
   }
   
   if (testimonialSection) {
     testimonialSection.dataset.gaLabel = "testimonios";
-    dispatchGaEngagementTimeByContent(testimonialSection);
+    dispatchGaEngagementTimeByContent(testimonialSection, 0.4);
   }
 
   if (faqSection) {
     faqSection.dataset.gaLabel = "preguntas_frecuentes";
-    dispatchGaEngagementTimeByContent(faqSection);
+    dispatchGaEngagementTimeByContent(faqSection, 0.1);
   }
 
   // Listening ga:track custom event. Used in focusSection, faqSection and aboutMeSection and testimonialSection
