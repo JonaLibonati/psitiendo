@@ -1,6 +1,11 @@
 ---
+import { contactData } from "../../data/contact/contactData"
 import Section from "../primitives/Section.astro"
 import StatItem from "./StatItem.astro"
+
+import icon1 from "../../assets/icons/1.png"
+import icon2 from "../../assets/icons/2.png"
+import icon3 from "../../assets/icons/3.png"
 
 const stats = [
   { value: "+6", text: "años brindando terapias online" },
@@ -16,4 +21,23 @@ const stats = [
       <StatItem value={stat.value} text={stat.text}/>
     ))}
   </ul>
+  <div class="w-full pt-20 md:pt-10">
+      <div class="w-fit m-auto flex gap-6 md:gap-16">
+      {contactData.socialMedia.map((item) => (
+        <a
+          href={item.href}
+          aria-label={item.ariaLabel}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:scale-110 transition duration-200"
+          data-ga-event={item.ga_event}
+          data-ga-label="hero"
+        >
+          {item.name === "instagram" && <img class="size-14 md:size-16 lg:size-20" src={icon1.src} />}
+          {item.name === "linkedin" && <img class="size-14 md:size-16 lg:size-20" src={icon2.src} />}
+          {item.name === "facebook" && <img class="size-14 md:size-16 lg:size-20" src={icon3.src} />}
+        </a>
+      ))}
+    </div>
+  </div>
 </Section>
