@@ -5,9 +5,15 @@ import stickersMobile from "../../assets/stickers_mobile.webp"
 import stickersDesktop from "../../assets/stickers_desktop.webp"
 import { servicesData } from "../../data/services/servicesData.js"
 import { contactData } from "../../data/contact/contactData.js"
+
+import arrow2 from "../../assets/arrows/arrow-top-right.png"
 ---
 
 <Section id="terapias" headline="TERAPIAS" subheadline="Conoce las terapias online que brindo.">
+  <div class="relative h-[50px] md:h-[60px] pb-2 max-w-[660px] m-auto">
+    <img class=`absolute z-50 w-[56px] md:w-[72px] invert-20 rotate-240` src={arrow2.src} alt="Flecha dibujada a mano apuntando al boton" />
+    <img class=`absolute z-50 w-[56px] md:w-[72px] left-[200px] md:left-[340px] invert-20 rotate-0` src={arrow2.src} alt="Flecha dibujada a mano apuntando al boton" />
+  </div>
   <div id="folder" class="folder relative max-w-[660px] m-auto text-white">
     <div id="folder-inner" class="relative z-50 tab-pop">
 
