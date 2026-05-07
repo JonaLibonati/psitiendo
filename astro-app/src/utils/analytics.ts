@@ -1,4 +1,27 @@
 
+interface GaEventParams {
+    event_label?: string
+    threshold_seconds?: number
+    reading_time_seconds?: number
+    consent_state?: 'granted' | 'denied' | 'unknown'
+  }
+
+const getConsentState = (): 'granted' | 'denied' | 'unknown' => {
+  const consent = localStorage.getItem('cookie_consent_web_psi')
+  if (consent === 'accepted') return 'granted'
+  if (consent === 'rejected') return 'denied'
+  return 'unknown' // usuario que aún no interactuó con el banner
+}
+
+export const trackEvent = (eventName: string, params: GaEventParams) => {
+  if (typeof window.gtag === "function") {
+    window.gtag("event", `webpsi.${eventName}`, {
+      ...params,
+      consent_state: getConsentState(),
+    })
+  }
+}
+
 export const dispatchLocalGaEvent = (eventName: string, eventLabel: string | undefined) => {
   document.dispatchEvent(
     new CustomEvent('ga:track', {
@@ -41,12 +64,27 @@ export const getReadingTimeSeconds = (target: HTMLElement): number => {
   return Math.ceil(words / 4)
 }
 
+const getAdaptiveThreshold = (target: HTMLElement, desiredThreshold: number = 0.45): number => {
+  const elementHeight = target.getBoundingClientRect().height
+  const viewportHeight = window.innerHeight
+
+  // Si el elemento es más alto que el viewport, ajustamos el threshold
+  // para que siempre sea alcanzable. Dejamos un margen del 90% para
+  // asegurarnos de que el observer se dispara con seguridad.
+  if (elementHeight > viewportHeight - 45) {
+    const maxAchievableThreshold = viewportHeight / elementHeight
+    return Math.min(desiredThreshold, maxAchievableThreshold * 0.5)
+  }
+
+  return desiredThreshold
+}
+
 export const dispatchGaEngagementTimeEvent = (
   target: HTMLElement,
   timeLimit: number | Array<number>,
   option?: {
     percentages?: Array<number>
-    threshold?: number | number[],
+    threshold?: number | undefined,
   }
 ) => {
   let isIntersecting: boolean = false
@@ -58,6 +96,8 @@ export const dispatchGaEngagementTimeEvent = (
   const length = limits.length
   let isTracked: Array<boolean> = new Array(length).fill(false)
   let remainingTimes: Array<number> = limits.map(t => t * 1000)
+
+  const adaptiveThreshold = getAdaptiveThreshold(target, option?.threshold);
 
   const getEventName = (i: number): string => {
     if (option?.percentages && option?.percentages[i]) {
@@ -134,7 +174,7 @@ export const dispatchGaEngagementTimeEvent = (
         isIntersecting = false
       }
     })
-  }, { threshold: option?.threshold || 0.5 })
+  }, { threshold: adaptiveThreshold })
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
@@ -151,7 +191,10 @@ export const dispatchGaEngagementTimeEvent = (
   engagementTimeObserver.observe(target)
 }
 
-export const dispatchGaEngagementTimeByContent = (target: HTMLElement, threshold: number | number[] | undefined) => {
+export const dispatchGaEngagementTimeByContent = (
+  target: HTMLElement,
+  threshold: number | undefined = undefined
+) => {
   const readingTime = getReadingTimeSeconds(target)
 
   const thresholds = [
@@ -162,6 +205,10 @@ export const dispatchGaEngagementTimeByContent = (target: HTMLElement, threshold
     Math.round(readingTime * 1.00),
   ]
 
-  dispatchGaEngagementTimeEvent(target, thresholds, {percentages: [10, 25, 50, 75, 100], threshold: threshold} )
+  dispatchGaEngagementTimeEvent(target, thresholds, {
+    percentages: [10, 25, 50, 75, 100],
+    threshold: threshold,
+  })
 }
+
 

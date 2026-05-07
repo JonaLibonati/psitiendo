@@ -7,44 +7,44 @@ import CheckIcon from "../icons/CheckIcon.astro"
   id="cookie-banner"
   class="fixed bottom-10 w-full px-4 z-[9999] translate-y-[200%] transition-all duration-500 ease-in-out"
 >
-  <div class="right-0 left-0 m-auto grid grid-cols-[1fr_fit-content(0)_fit-content(0)] max-w-[900px] items-center bg-gray-light p-3 border-2 border-gray-light rounded-md text-white">
+  <div class="right-0 left-0 m-auto grid grid-cols-1 md:grid-cols-[1fr_fit-content(0)_fit-content(0)] max-w-[900px] items-center bg-gray-light p-3 border-2 border-gray-light rounded-md text-white">
     <p class="text-white text-sm md:text-base">
-      Usamos cookies de Google Analytics para mejorar tu experiencia de usuario. Puedes aceptar o declinarlas.
+      Usamos cookies de Google para mejorar tu experiencia de usuario, personalizar contenido y anuncios. Puedes aceptar o declinarlas.
     </p>
-
-    <!-- Aceptar — destacado -->
-    <button
-      id="cookie-accept"
-      aria-label="Aceptar cookies"
-      class="flex items-center gap-1 mr-4 px-3 py-1 rounded-full cursor-pointer bg-steel-blue hover:bg-brown transition-colors duration-200"
-    >
-      <span class="hidden md:inline font-poppins font-semibold text-sm">Aceptar</span>
-      <CheckIcon class="size-5" />
-    </button>
 
     <!-- Rechazar — discreto -->
     <button
       id="cookie-decline"
       aria-label="Rechazar cookies"
-      class="flex items-center gap-1 px-3 py-1 rounded-full cursor-pointer text-white/60 hover:text-white transition-colors duration-200"
+      class="justify-self-center place-content-center w-[120px] flex items-center gap-1 my-2 md:m-none px-3 py-1 rounded-full cursor-pointer text-white/60 hover:text-white transition-colors duration-200"
     >
-      <span class="hidden md:inline font-poppins font-semibold text-sm">Rechazar</span>
+      <span class="inline font-poppins font-semibold text-sm">Rechazar</span>
       <XIcon class="size-5" />
     </button>
 
+    <!-- Aceptar — destacado -->
+    <button
+      id="cookie-accept"
+      aria-label="Aceptar cookies"
+      class="justify-self-center place-content-center text-center w-[120px] flex items-center gap-1 my-2 md:m-none md:mr-4 px-3 py-1 rounded-full cursor-pointer bg-steel-blue hover:bg-brown transition-colors duration-200"
+    >
+      <span class="font-poppins font-semibold text-sm">Aceptar</span>
+      <CheckIcon class="size-5" />
+    </button>
   </div>
 </div>
 
 <script>
-  const banner = document.getElementById('cookie-banner')
-  const btnAccept = document.getElementById('cookie-accept')
+  const CONSENT_KEY = 'cookie_consent_web_psi'
+
+  const banner     = document.getElementById('cookie-banner')
+  const btnAccept  = document.getElementById('cookie-accept')
   const btnDecline = document.getElementById('cookie-decline')
 
   const showBanner = () => {
-    // Pequeño delay para que la transición se vea al cargar la página
     setTimeout(() => {
       banner?.classList.replace('translate-y-[200%]', 'translate-y-0')
-    }, 800)
+    }, 500)
   }
 
   const hideBanner = () => {
@@ -54,29 +54,61 @@ import CheckIcon from "../icons/CheckIcon.astro"
   const updateGtag = (status: 'granted' | 'denied') => {
     if (typeof window.gtag === 'function') {
       window.gtag('consent', 'update', {
-        ad_storage: status,
-        ad_user_data: status,
+        ad_storage:         status,
+        ad_user_data:       status,
         ad_personalization: status,
-        analytics_storage: status,
+        analytics_storage:  status,
       })
     }
   }
 
-  // Mostrar banner si no hay consentimiento o fue rechazado
-  const consent = localStorage.getItem('cookie_consent')
-  if (!consent) {
-    showBanner()
+  let geoCache = null ;
+
+  export async function getGeo() {
+    if (geoCache) return geoCache;
+
+    const res = await fetch("https://www.psintiendoelmundo.com/", {
+      method: 'HEAD',
+      cache: 'no-store'
+    });
+
+    const isEU = res.headers.get('X-User-In-EU') === 'true';
+    const country = res.headers.get('X-Country-Code');
+
+    geoCache = { isEU, country };
+
+    return geoCache;
+  }
+
+  const consent = localStorage.getItem(CONSENT_KEY)
+
+  if (!consent || (consent !== 'granted' && consent !== 'denied')) {
+    try {
+      const {isEU, country}  = await getGeo();
+
+      if (isEU) {showBanner()}
+      else {
+        localStorage.setItem(CONSENT_KEY, 'accepted');
+        updateGtag('granted');
+      };
+    } catch (e) {
+      console.log(e)
+      showBanner();
+    }
+  } else {
+    updateGtag(consent)
   }
 
   btnAccept?.addEventListener('click', () => {
-    localStorage.setItem('cookie_consent', 'accepted')
+    localStorage.setItem(CONSENT_KEY, 'accepted')
     updateGtag('granted')
     hideBanner()
   })
 
   btnDecline?.addEventListener('click', () => {
-    localStorage.setItem('cookie_consent', 'rejected')
+    localStorage.setItem(CONSENT_KEY, 'rejected')
     updateGtag('denied')
     hideBanner()
   })
 </script>
+

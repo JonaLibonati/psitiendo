@@ -20,8 +20,8 @@ import imgLeft1 from "../../assets/post-it/post_it_left_1.webp"
 import imgRight1 from "../../assets/post-it/post_it_right_1.webp"
 import imgLeft2 from "../../assets/post-it/post_it_left_2.webp"
 import imgRight2 from "../../assets/post-it/post_it_right_2.webp"
-import imgLeft3 from "../../assets/post-it/post_it_left_3.webp"
-import imgRight3 from "../../assets/post-it/post_it_right_3.webp"
+import imgLeft3 from "../../assets/post-it/post_it_left_3.png"
+import imgRight3 from "../../assets/post-it/post_it_right_3.png"
 
 export const postIts = [
   {

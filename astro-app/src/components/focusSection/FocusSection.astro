@@ -9,6 +9,11 @@ import imgRitmo from "../../assets/focus/a_tu_ritmo.jpg";
 import PlusIcon from "../global/icons/PlusIcon.astro";
 import DashIcon from "../global/icons/DashIcon.astro";
 
+import arrow1 from "../../assets/arrows/arrow-top-left.png"
+import arrow2 from "../../assets/arrows/arrow-top-right.png"
+import arrow3 from "../../assets/arrows/arrow-bottom-left.png"
+import arrow4 from "../../assets/arrows/arrow-bottom-right.png"
+
 const cards = [
   {
     img: imgMiradaIntegrativa,
@@ -19,6 +24,8 @@ const cards = [
     alt: "Imagen de fondo de rompecabezas",
     showDBT: false,
     ga_label: "modal_mirada_integrativa",
+    arrow: arrow4,
+    arrowStyles: "rotate-200 top-[330px] lg:top-[310px] right-[60px]",
   },
   {
     img: imgPsicodinamica,
@@ -29,6 +36,8 @@ const cards = [
     alt: "Imagen de fondo de enfoque psicodinámico",
     showDBT: false,
     ga_label: "modal_enfoque_psicodinamico",
+    arrow: arrow4,
+    arrowStyles: "rotate-200 top-[330px] lg:top-[310px] right-[60px]",
   },
   {
     img: imgDbt,
@@ -39,6 +48,8 @@ const cards = [
     alt: "Imagen de fondo de herramientas de supervivencia y aventura",
     showDBT: true,
     ga_label: "modal_dbt",
+    arrow: arrow4,
+    arrowStyles: "rotate-200 top-[330px] lg:top-[310px] right-[60px]",
   },
   {
     img: imgMigra,
@@ -49,6 +60,8 @@ const cards = [
     alt: "Imagen de fondo de mapamundi",
     showDBT: false,
     ga_label: "modal_enfoque_migratorio",
+    arrow: arrow4,
+    arrowStyles: "rotate-200 top-[330px] lg:top-[310px] right-[60px]",
   },
   {
     img: imgIntegrar,
@@ -59,6 +72,9 @@ const cards = [
     alt: "Imagen de fondo de una mente conflictuada",
     showDBT: false,
     ga_label: "modal_porque_integrar",
+    arrow: arrow4,
+    arrowStyles: "rotate-200 top-[330px] lg:top-[310px] right-[60px]",
+    
   },
   {
     img: imgRitmo,
@@ -69,6 +85,8 @@ const cards = [
     alt: "Imagen de fondo de un escritorio con una computadora, gafas y elementos de libreria",
     showDBT: false,
     ga_label: "modal_a_tu_ritmo",
+    arrow: arrow4,
+    arrowStyles: "rotate-200 top-[330px] lg:top-[310px] right-[60px]",
   },
 ];
 ---
@@ -112,6 +130,9 @@ const cards = [
               <DashIcon class="dash-icon size-10 text-charcoal hidden" />
             </button>
 
+            {/* Arrow +/- */}
+            <img class={`${card.arrowStyles} card-arrow absolute z-50 w-[56px] lg:w-[72px] invert opacity-100 transition duration-800`} src={card.arrow.src} alt="Flecha dibujada a mano apuntando al boton" />
+
             {/* Contenido */}
             <div class="relative z-60 px-4 py-6">
               <h3 class="relative headline w-fit mb-5">
@@ -152,6 +173,7 @@ const cards = [
       const dashIcon = card.querySelector<HTMLElement>(".dash-icon");
       const dbtLabel = card.querySelector<HTMLElement>(".dbt-label");
       const btn = card.querySelector<HTMLElement>(".card-btn");
+      const arrow = card.querySelector<HTMLElement>(".card-arrow");
 
       if (isOpen) {
         //GA all cards have been opened at least once event
@@ -161,6 +183,7 @@ const cards = [
         //styles and aria labels
         img?.classList.replace("opacity-100", "opacity-0");
         text?.classList.replace("opacity-0", "opacity-100");
+        arrow?.classList.replace("opacity-100", "opacity-0");
         plusIcon?.classList.add("hidden");
         dashIcon?.classList.remove("hidden");
         dbtLabel?.classList.replace("opacity-100", "opacity-0");
@@ -169,6 +192,7 @@ const cards = [
       } else {
         img?.classList.replace("opacity-0", "opacity-100");
         text?.classList.replace("opacity-100", "opacity-0");
+        arrow?.classList.replace("opacity-0", "opacity-100");
         plusIcon?.classList.remove("hidden");
         dashIcon?.classList.add("hidden");
         dbtLabel?.classList.replace("opacity-0", "opacity-100");

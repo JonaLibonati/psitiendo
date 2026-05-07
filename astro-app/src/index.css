@@ -46,6 +46,14 @@
     overflow: hidden;
   }
 
+  section {
+     @apply py-[100px]; 
+  }
+
+  section#precios {
+     @apply pb-0; 
+  }
+
   /* font-poppins: black bold semibold regular regularItalic */
 
   /* font-mulish: bold regular regularItalic */
@@ -55,9 +63,8 @@
   }
 
   section#hero h2.headlineH1 {
-    @apply font-poppins font-semibold text-5xl/15 text-dark-gray tracking-wider;
+    @apply font-poppins font-semibold text-3xl/10 md:text-4xl/12 text-dark-gray tracking-wider;
   }
-
 
   section h2.headline {
     @apply font-black text-camel text-4xl/12 md:text-5xl/15 lg:text-6xl/18 tracking-wider break-words hyphens-auto text-shadow-lg;
@@ -116,7 +123,7 @@
 
   #testimonios {
     background-color: var(--color-brown);
-    @apply pt-[200px] md:pt-[100px];
+    @apply pt-[300px] md:pt-[200px];
   }
 
   section#testimonios h2.headline {
@@ -144,7 +151,7 @@
   }
 
   section#hero .subheadline {
-    @apply text-3xl/10;
+    @apply text-lg/6 md:text-xl/6;
   }
 
   #testimonios .subheadline {
@@ -169,6 +176,10 @@
 
   .button {
     @apply font-poppins font-semibold text-white text-lg lg:text-xl
+  }
+
+  section#precios>div {
+    padding-block: 0px;
   }
 
   @keyframes tab-pop {

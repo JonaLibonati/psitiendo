@@ -14,6 +14,39 @@ const { robots = "index, follow" } = Astro.props
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    var consent = localStorage.getItem("cookie_consent_web_psi");
+    var hasAccepted = (consent === 'accepted');
+
+    // 1. Configuración para territorios con leyes de privacidad estrictas (EEE + Reino Unido + Suiza)
+    gtag('consent', 'default', {
+      'ad_storage': hasAccepted ? 'granted' : 'denied',
+      'ad_user_data': hasAccepted ? 'granted' : 'denied',
+      'ad_personalization': hasAccepted ? 'granted' : 'denied',
+      'analytics_storage': hasAccepted ? 'granted' : 'denied',
+      'wait_for_update': 500,
+      'region': ['BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'LI', 'NO', 'CH', 'GB']
+    });
+
+    // 2. Configuración para el resto del mundo (incluyendo Argentina)
+    gtag('consent', 'default', {
+      'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted',
+      'analytics_storage': 'granted',
+      'wait_for_update': 500
+    });
+  </script>
+
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PDZX4KSF');</script>
+
     <!-- hero preload -->
     <link rel="preload" as="image" href={heroBg.src} fetchpriority="high" />
     <link rel="preload" as="image" href={heroHeadline.src} fetchpriority="high" />
@@ -119,25 +152,6 @@ const { robots = "index, follow" } = Astro.props
         }
       }
       </script>
-
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      var consent = localStorage.getItem("cookie_consent");
-      gtag('consent', 'default', {
-        'ad_storage': consent === 'accepted' ? 'granted' : 'denied',
-        'ad_user_data': consent === 'accepted' ? 'granted' : 'denied',
-        'ad_personalization': consent === 'accepted' ? 'granted' : 'denied',
-        'analytics_storage': consent === 'accepted' ? 'granted' : 'denied',
-        'wait_for_update': 500
-      });
-    </script>
-
-    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PDZX4KSF');</script>
   </head>
   <body>
     <noscript>

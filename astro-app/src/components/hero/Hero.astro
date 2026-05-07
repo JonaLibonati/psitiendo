@@ -8,24 +8,25 @@ import heroHeadline from "../../assets/hero_headline.webp"
 import { contactData } from "../../data/contact/contactData"
 ---
 
-<section id="hero" class="flex justify-center h-[1000px] md:h-[700px] max-w-full mt-[40px] md:mt-[20px]">
+<section id="hero" class="py-0 flex justify-center h-[840px] md:h-[700px] max-w-full mt-[40px] md:mt-[20px]">
   <h1 class="vhn">Psicóloga online especializada en migración, Lic. Daiana Telesca Farley, Psintiendo el Mundo.</h1>
   <Column class="mt-[50px] md:mt-[80px]">
-    <div class="md:w-[600px] mb-[40px] md:mb-[83px] lg:mb-[56px]">
+    <div class="md:w-[600px] mb-[20px] md:mb-[83px] lg:mb-[56px]">
       <img
-        class="mb-6 md:mb-0 md:max-w-[430px]"
+        class="mb-4 md:mb-8 max-w-[200px] md:max-w-[300px]"
         src={heroHeadline.src}
         alt="Imagen de psintiendo al mundo logo"
         fetchpriority="high"
         decoding="async"
       />
       <h2 class="headlineH1">
-        <span class="block font-normal text-2xl pl-[2px]">LIC.</span>
+        <span class="block font-normal text-xl md:text-2xl pl-[2px]">LIC.</span>
         DAIANA TELESCA FARLEY
       </h2>
-      <h3 class="subheadline max-w-[400px] mt-4 pr-[70px]">
+      <h3 class="subheadline mt-2 mb-[20px] md:mb-[40px]">
         PSICÓLOGA CLÍNICA Y DE&nbsp;MIGRACIÓN
       </h3>
+      <p class="max-w-[340px] text-center md:text-left text-xl md:text-2xl text-shadow-sm text-charcoal">Un <span class="text-violet font-bold">espacio cálido y seguro</span> para poner en palabras y ordenar lo que estás sintiendo.</p>
     </div>
     <MainButton
       text="AGENDAR SESIÓN"

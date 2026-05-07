@@ -1,0 +1,38 @@
+---
+import Section from "../primitives/Section.astro"
+---
+
+<Section id="precios" headline="PRECIOS" subheadline="Conoce mas información sobre las modalidades y precios.">
+  <div class="container grid md:grid-cols-3 gap-6 pb-10">
+
+    <div class="element p-4">
+      <p class="font-poppins font-semibold text-2xl text-brown pb-2">Modalidad</p>
+      <p>Las sesiones se realizan de manera online (Google Meet), con frecuencia semanal o quincenal según cada proceso. Al inicio se recomienda una frecuencia semanal.</p>
+    </div>
+
+    <div class="element p-4">
+      <p class="font-poppins font-semibold text-2xl text-brown pb-2">Residentes en Argentina</p>
+      <p class="pb-1"><span class="font-poppins font-semibold text-lg text-brown">Semanal:</span> $35.000 ARS por sesión</p>
+      <p><span class="font-poppins font-semibold text-lg text-brown">Quincenal:</span> $40.000 ARS por sesión</p>
+    </div>
+
+    <div class="element p-4">
+      <p class="font-poppins font-semibold text-2xl text-brown pb-2">Residentes en otros paises</p>
+      <p class="pb-1"><span class="font-poppins font-semibold text-lg text-brown">Semanal:</span> 40 USD / 35 EUR por sesión</p>
+      <p><span class="font-poppins font-semibold text-lg text-brown">Quincenal:</span> 45 USD / 40 EUR por sesión</p>
+    </div>
+  </div>
+  <div class="grid gap-2">
+    <p>* La primera sesión se abona al valor semanal.</p>
+    <p>* El valor en pesos argentinos está destinado exclusivamente a personas que residen actualmente en Argentina.</p>
+  </div>
+</Section>
+
+<style>
+  .container .element {
+    border: 2px;
+    border-color: var(--color-brown);
+    border-radius: 4px;
+    border-style: solid;
+  } 
+</style>

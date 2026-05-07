@@ -13,6 +13,7 @@ import TestimonialSection from '../components/testimonialSection/TestimonialSect
 import WhatsappButton from '../components/global/whatsapp/WhatsappButton.astro'
 import CookiesConsent from '../components/global/cookiesConsent/CookiesConsent.astro'
 import Analytics from '../components/global/analytics/Analytics.astro'
+import PricesSection from '../components/pricesSection/PricesSection.astro'
 ---
 
 <Layout>
@@ -25,6 +26,7 @@ import Analytics from '../components/global/analytics/Analytics.astro'
     <FocusSection />
     <ServicesSection />
     <TestimonialSection />
+    <PricesSection />
     <FaqSection />
     <CtaSection />
   </main>
@@ -37,8 +39,6 @@ import Analytics from '../components/global/analytics/Analytics.astro'
   import { dispatchGaEngagementTimeEvent } from "../utils/analytics";
 
   const main = document.querySelector<HTMLElement>("main");
-
-  console.dir(main)
 
   if (main) dispatchGaEngagementTimeEvent(main, 45, { threshold : 0.05 });
 </script>

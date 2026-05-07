@@ -1,17 +1,5 @@
 <script>
-  import { dispatchGaEngagementTimeByContent } from "../../../utils/analytics";
-
-  interface GaEventParams {
-    event_label?: string
-    threshold_seconds?: number
-    reading_time_seconds?: number
-  }
-
-  const trackEvent = (eventName: string, params: GaEventParams) => {
-    if (typeof window.gtag === "function") {
-      window.gtag("event", eventName, params)
-    }
-  }
+  import { trackEvent, dispatchGaEngagementTimeByContent } from "../../../utils/analytics";
 
   //Tracking whapsapp clicks
   document
@@ -73,31 +61,37 @@
   const focusSection = document.getElementById("enfoque");
   const servicesSection = document.getElementById("terapias");
   const testimonialSection = document.getElementById("testimonios");
+  const pricesSection = document.getElementById("precios");
   const faqSection = document.getElementById("faq");
   
   if (aboutMeSection) {
     aboutMeSection.dataset.gaLabel = "sobre_mi";
-    dispatchGaEngagementTimeByContent(aboutMeSection, 0.4)
+    dispatchGaEngagementTimeByContent(aboutMeSection)
   }
 
   if (focusSection) {
     focusSection.dataset.gaLabel = "enfoque";
-    dispatchGaEngagementTimeByContent(focusSection, 0.1);
+    dispatchGaEngagementTimeByContent(focusSection);
   }
 
   if (servicesSection) {
     servicesSection.dataset.gaLabel = "terapias_ofrecidas";
-    dispatchGaEngagementTimeByContent(servicesSection,0.4);
+    dispatchGaEngagementTimeByContent(servicesSection);
   }
   
   if (testimonialSection) {
     testimonialSection.dataset.gaLabel = "testimonios";
-    dispatchGaEngagementTimeByContent(testimonialSection, 0.4);
+    dispatchGaEngagementTimeByContent(testimonialSection);
+  }
+
+  if (pricesSection) {
+    pricesSection.dataset.gaLabel = "precios";
+    dispatchGaEngagementTimeByContent(pricesSection);
   }
 
   if (faqSection) {
     faqSection.dataset.gaLabel = "preguntas_frecuentes";
-    dispatchGaEngagementTimeByContent(faqSection, 0.1);
+    dispatchGaEngagementTimeByContent(faqSection);
   }
 
   // Listening ga:track custom event. Used in focusSection, faqSection and aboutMeSection and testimonialSection

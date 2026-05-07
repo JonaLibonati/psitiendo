@@ -5,7 +5,7 @@ const { id, headline, subheadline, pBottom = "pb-10" } = Astro.props
 ---
 
 <section id={id}>
-  <Column class="py-[100px]">
+  <Column>
     {headline && <h2 class="headline pb-10">{headline}</h2>}
     {subheadline && <h3 class={`subheadline ${pBottom}`}>{subheadline}</h3>}
     <slot />

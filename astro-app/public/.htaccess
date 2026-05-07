@@ -16,6 +16,13 @@ Redirect 301 /testimonios/ https://www.psintiendoelmundo.com/#testimonios
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json image/svg+xml font/woff font/woff2
 </IfModule>
 
+# Activar GeoIP
+GeoIPEnable On
+
+# Detectar Unión Europea
+RewriteCond %{ENV:GEOIP_COUNTRY_CODE} ^(BE|BG|CZ|DK|DE|EE|IE|EL|ES|FR|HR|IT|CY|LV|LT|LU|HU|MT|NL|AT|PL|PT|RO|SI|SK|FI|SE|IS|LI|NO|CH|GB)$
+RewriteRule ^ - [E=IS_EU:1]
+
 # Cache de navegador
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -39,7 +46,23 @@ Redirect 301 /testimonios/ https://www.psintiendoelmundo.com/#testimonios
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  
+  # --- GEO HEADERS CORRECTOS ---
+  
+  # Default (no UE)
+  Header set X-User-In-EU "false"
+
+  # Override si es UE
+  Header set X-User-In-EU "true" env=IS_EU
+
+  # País
+  Header set X-Country-Code %{GEOIP_COUNTRY_CODE}e
+
+  # Evitar problemas de cache
+  Header merge Vary "X-User-In-EU"
 </IfModule>
 
 # Página 404
 ErrorDocument 404 /404.html
+
+

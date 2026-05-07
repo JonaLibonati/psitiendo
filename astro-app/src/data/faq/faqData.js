@@ -31,7 +31,7 @@ export const faqData = [
   },
   {
     pregunta: "¿Qué debo esperar de una primera sesión?",
-    respuesta: "Comenzaré presentándote y tomando algunos datos personales para conocer tu contexto. Luego abriré el espacio para que puedas contarme qué te trae a terapia. No necesitas preparar nada; si lo necesitas, te guiaré con preguntas. En esta primera sesión comenzaremos a trazar un mapa de trabajo para el proceso terapéutico.",
+    respuesta: "Comenzaré presentándome y tomando algunos datos personales para conocer tu contexto. Luego abriré el espacio para que puedas contarme qué te trae a terapia. No necesitas preparar nada; si lo necesitas, te guiaré con preguntas. En esta primera sesión comenzaremos a trazar un mapa de trabajo para el proceso terapéutico.",
     ga_label: "faq_7-expectativa_primera_sesion",
   },
   {
@@ -71,12 +71,12 @@ export const faqData = [
   },
   {
     pregunta: "¿Cuáles son las modalidades de pago?",
-    respuesta: "El pago puede realizarse en USD o EUR mediante billeteras virtuales internacionales (por ejemplo: Wise o Revolut), o como alternativa, a través de PayPal. Se prioriza el uso de billeteras virtuales ya que PayPal puede aplicar comisiones adicionales.",
+    respuesta: "Para residentes en Argentina:\n  -Transferencia bancaria (CBU/CVU)\n  -Billeteras virtuales (Mercado Pago, etc.)\n\nPara residentes en otros paises:\n  -Billeteras internacionales (Wise, Revolut, etc)\n  -PayPal\n\n*Para residentes en el exterior se prioriza el uso de billeteras virtuales para evitar comisiones adicionales.",
     ga_label: "faq_15-modalidad_pago",
   },
   {
-    pregunta: "¿Cómo puedo consultar el valor de la sesión?",
-    respuesta: "El valor de la sesión se informa de manera privada, ya que puede variar según la moneda de pago (USD/EUR) y la frecuencia acordada (semanal o quincenal). Puedes solicitar esta información escribiéndome por WhatsApp o a través de mis redes sociales.",
+    pregunta: "¿Cual es el valor de las sesiones?",
+    respuesta: "Los valores varían según el país de residencia:\n\nPara personas residentes en Argentina\n  -Frecuencia semanal: $35.000 ARS por sesión\n  -Frecuencia quincenal: $40.000 ARS por sesión\n\nPara personas residentes en otros paises\n  -Frecuencia semanal: 40 USD / 35 EUR por sesión\n  -Frecuencia quincenal: 45 USD / 40 EUR por sesión\n\n*El valor en pesos argentinos está destinado exclusivamente a personas que residen actualmente en Argentina. Para residentes en el exterior, las sesiones se abonan en USD o EUR.\n\nIMPORTANTE: La primera sesión se abona al valor de la modalidad semanal.",
     ga_label: "faq_16-valor_sesion",
   },
 ]
